@@ -21,7 +21,7 @@ The app includes an authenticated frontend workspace, a persistent analysis hist
 - AI Provider: Groq
 - Auth and Security: JWT, bcrypt, helmet, express-rate-limit, CORS
 
-## Project Structure
+## Project Structure.     
 
 ```text
 frontend/   React client and workspace UI
