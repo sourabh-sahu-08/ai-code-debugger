@@ -14,7 +14,7 @@ AI-assisted code analysis and debugging workspace built with React, Vite, Expres
 
 The app includes an authenticated frontend workspace, a persistent analysis history, and public sharing support for selected reports.
 
-## Stack
+## Stack.
 
 - Frontend: React, Vite, Tailwind CSS, Monaco Editor, Framer Motion
 - Backend: Node.js, Express, MongoDB, Mongoose
