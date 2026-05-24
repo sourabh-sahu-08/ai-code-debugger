@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   BrainCircuit,
@@ -17,6 +18,7 @@ import Layout from "@/components/Layout";
 import { analysisService } from "@/utils/api";
 
 export default function Home() {
+  const navigate = useNavigate();
   const [code, setCode] = useState(`function sumVisiblePrices(items) {
   return items
     .filter((item) => item.visible)
@@ -27,6 +29,7 @@ export default function Home() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const steps = [
     "Building analysis context",
@@ -43,6 +46,10 @@ export default function Home() {
   ];
 
   useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("token"));
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (event) => {
       if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
         if (!isAnalyzing && code.trim()) {
@@ -56,11 +63,11 @@ export default function Home() {
   }, [code, isAnalyzing]);
 
   const handleAnalyze = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
+    if (!isLoggedIn) {
       toast.error("Sign in required", {
         description: "Create an account or sign in to run a full analysis.",
       });
+      navigate("/auth/register");
       return;
     }
 
@@ -171,9 +178,14 @@ export default function Home() {
                       <div className="h-4 w-4 rounded-full border-2 border-slate-900/20 border-t-slate-900 animate-spin" />
                       {steps[analysisStep]}
                     </>
-                  ) : (
+                  ) : isLoggedIn ? (
                     <>
                       Run Analysis
+                      <ArrowRight size={16} />
+                    </>
+                  ) : (
+                    <>
+                      Sign Up to Run
                       <ArrowRight size={16} />
                     </>
                   )}
@@ -250,6 +262,49 @@ export default function Home() {
                     >
                       Try again
                     </button>
+                  </motion.div>
+                ) : !isLoggedIn ? (
+                  <motion.div
+                    key="guest-empty"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="flex flex-1 flex-col justify-between p-8"
+                  >
+                    <div>
+                      <div className="flex h-20 w-20 items-center justify-center rounded-[1.75rem] bg-sky-400/10 text-sky-300 shadow-lg shadow-sky-500/10">
+                        <Sparkles size={36} className="animate-float" />
+                      </div>
+                      <h3 className="mt-6 text-xl font-bold text-white">
+                        Unlock Advanced AI Auditing
+                      </h3>
+                      <p className="mt-3 max-w-sm text-sm leading-6 text-slate-400">
+                        Join developers using our secure neural core to analyze snippets, detect OWASP vulnerabilities, and generate optimized fixes.
+                      </p>
+                    </div>
+
+                    <div className="grid gap-3 my-6">
+                      {[
+                        { title: "Smart Edge-Case Diagnostics", desc: "Logical flaws, boundary errors, and race conditions." },
+                        { title: "Proactive Security Audits", desc: "OWASP-focused scanning for injection & memory safety." },
+                        { title: "Interactive Follow-Up Chat", desc: "Discuss findings directly with our senior AI assistant." }
+                      ].map((item) => (
+                        <div
+                          key={item.title}
+                          className="rounded-2xl border border-white/5 bg-slate-950/40 p-4 hover:border-sky-400/10 transition-colors"
+                        >
+                          <p className="text-xs font-bold text-white uppercase tracking-wider">{item.title}</p>
+                          <p className="text-[11px] text-slate-500 mt-1">{item.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <Link
+                      to="/auth/register"
+                      className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-sky-400 text-sm font-bold text-slate-950 shadow-lg shadow-sky-400/20 hover:bg-sky-300 active:scale-95"
+                    >
+                      Start Free Audit Session
+                      <ArrowRight size={16} />
+                    </Link>
                   </motion.div>
                 ) : (
                   <motion.div
