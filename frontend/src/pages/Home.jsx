@@ -45,23 +45,6 @@ export default function Home() {
     { label: "C++", value: "cpp" },
   ];
 
-  useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem("token"));
-  }, []);
-
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
-        if (!isAnalyzing && code.trim()) {
-          handleAnalyze();
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [code, isAnalyzing]);
-
   const handleAnalyze = async () => {
     if (!isLoggedIn) {
       toast.error("Sign in required", {
@@ -96,6 +79,23 @@ export default function Home() {
       setIsAnalyzing(false);
     }
   };
+
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("token"));
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+        if (!isAnalyzing && code.trim()) {
+          handleAnalyze();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [code, isAnalyzing]);
 
   return (
     <Layout>
