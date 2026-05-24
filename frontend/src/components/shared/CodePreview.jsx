@@ -2,9 +2,14 @@ import { useState } from 'react';
 import { Editor } from '@monaco-editor/react';
 import { Copy, Check, Terminal } from 'lucide-react';
 import { toast } from 'sonner';
+import { EDITOR_THEME_NAME, defineEditorTheme } from '../../utils/editorTheme';
 
 export default function CodePreview({ code, language, title, height = "300px", readOnly = true }) {
     const [copied, setCopied] = useState(false);
+
+    const handleEditorWillMount = (monaco) => {
+        defineEditorTheme(monaco);
+    };
 
     const handleCopy = () => {
         const cleanCode = code?.replace(/^```[\w]*\n/, '').replace(/\n```$/, '') || "";
@@ -39,7 +44,8 @@ export default function CodePreview({ code, language, title, height = "300px", r
                         height="100%"
                         language={language || "javascript"}
                         value={displayCode}
-                        theme="vs-dark"
+                        theme={EDITOR_THEME_NAME}
+                        beforeMount={handleEditorWillMount}
                         options={{
                             readOnly,
                             minimap: { enabled: false },

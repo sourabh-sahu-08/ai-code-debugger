@@ -4,10 +4,15 @@ import { Check, Copy, AlertCircle, Zap, Clock, Maximize2, Sparkles, Terminal, Fi
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Editor } from "@monaco-editor/react";
+import { EDITOR_THEME_NAME, defineEditorTheme } from "../utils/editorTheme";
 
 export default function AnalysisResults({ data }) {
     const [activeTab, setActiveTab] = useState("fix");
     const [copied, setCopied] = useState(null);
+
+    const handleEditorWillMount = (monaco) => {
+        defineEditorTheme(monaco);
+    };
 
     if (!data) return null;
 
@@ -27,7 +32,7 @@ export default function AnalysisResults({ data }) {
     ];
 
     return (
-        <div className="flex flex-col h-full bg-[#111827]">
+        <div className="flex flex-col h-full bg-slate-950/20 backdrop-blur-md">
             {/* Tab Navigation */}
             <div className="flex p-2 bg-[#0B0F1A]/50 border-b border-white/5 gap-1">
                 {tabs.map((tab) => (
@@ -95,7 +100,8 @@ export default function AnalysisResults({ data }) {
                                     height="100%"
                                     language={data.language || "javascript"}
                                     value={cleanCode(data.correctedCode)}
-                                    theme="vs-dark"
+                                    theme={EDITOR_THEME_NAME}
+                                    beforeMount={handleEditorWillMount}
                                     options={{
                                         readOnly: true,
                                         minimap: { enabled: false },
@@ -171,7 +177,8 @@ export default function AnalysisResults({ data }) {
                                     height="100%"
                                     language={data.language || "javascript"}
                                     value={cleanCode(data.optimizedCode || data.correctedCode)}
-                                    theme="vs-dark"
+                                    theme={EDITOR_THEME_NAME}
+                                    beforeMount={handleEditorWillMount}
                                     options={{
                                         readOnly: true,
                                         minimap: { enabled: false },

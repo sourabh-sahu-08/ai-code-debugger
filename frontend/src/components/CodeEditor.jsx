@@ -1,31 +1,11 @@
 "use client";
 
-import Editor, { loader } from "@monaco-editor/react";
-import { useEffect } from "react";
+import Editor from "@monaco-editor/react";
+import { EDITOR_THEME_NAME, defineEditorTheme } from "../utils/editorTheme";
 
 export default function CodeEditor({ value, onChange, language }) {
-    
-    // Custom theme to match our premium dark theme
     const handleEditorWillMount = (monaco) => {
-        monaco.editor.defineTheme('premium-dark', {
-            base: 'vs-dark',
-            inherit: true,
-            rules: [
-                { token: 'comment', foreground: '64748b', fontStyle: 'italic' },
-                { token: 'keyword', foreground: '3b82f6', fontStyle: 'bold' },
-                { token: 'string', foreground: '10b981' },
-                { token: 'number', foreground: 'f59e0b' },
-            ],
-            colors: {
-                'editor.background': '#11182700', // Transparent to inherit from container
-                'editor.lineHighlightBackground': '#ffffff05',
-                'editorCursor.foreground': '#3b82f6',
-                'editor.selectionBackground': '#3b82f620',
-                'editorLineNumber.foreground': '#475569',
-                'editorLineNumber.activeForeground': '#94a3b8',
-                'editor.inactiveSelectionBackground': '#3b82f610',
-            }
-        });
+        defineEditorTheme(monaco);
     };
 
     return (

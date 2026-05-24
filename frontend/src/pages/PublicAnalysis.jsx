@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { analysisService } from "@/utils/api";
 import { ArrowLeft, Code, Clock, Zap, AlertTriangle, CheckCircle, Database, Sparkles, Download, Check, Copy, Terminal, Split, LayoutList, ChevronLeft, ShieldCheck, Activity, Share2 } from "lucide-react";
 import { DiffEditor, Editor } from "@monaco-editor/react";
+import { EDITOR_THEME_NAME, defineEditorTheme } from "../utils/editorTheme";
 import Layout from "@/components/Layout";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,6 +14,10 @@ export default function PublicAnalysis() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [viewMode, setViewMode] = useState("diff");
+
+    const handleEditorWillMount = (monaco) => {
+        defineEditorTheme(monaco);
+    };
 
     const cleanCode = (code) => code?.replace(/^```[\w]*\n/, '').replace(/\n```$/, '') || "";
 
@@ -43,11 +48,22 @@ export default function PublicAnalysis() {
         toast.success("Markdown report exported");
     };
 
-    if (loading) return (
-        <Layout><div className="h-screen flex items-center justify-center">
-            <div className="w-10 h-10 border-2 border-blue-500/20 border-t-blue-500 rounded-full animate-spin" />
-        </div></Layout>
-    );
+    if (loading) {
+        return (
+            <Layout>
+                <div className="flex flex-col items-center justify-center h-[80vh] space-y-8">
+                    <div className="relative">
+                        <div className="absolute inset-0 bg-blue-500 blur-3xl opacity-20 animate-pulse" />
+                        <div className="w-20 h-20 border-4 border-blue-500/10 border-t-blue-500 rounded-full animate-spin relative z-10 shadow-2xl"></div>
+                    </div>
+                    <div className="text-center space-y-2">
+                        <p className="text-white font-black text-xl tracking-[0.2em] uppercase animate-shimmer bg-clip-text text-transparent">Decoding Shared Metadata</p>
+                        <p className="text-slate-500 text-xs font-black tracking-widest uppercase">ESTABLISHING SECURE CONNECTION...</p>
+                    </div>
+                </div>
+            </Layout>
+        );
+    }
 
     if (error || !analysis) return (
         <Layout>
@@ -201,7 +217,8 @@ export default function PublicAnalysis() {
                                 language={analysis.language || "javascript"}
                                 original={cleanCode(analysis.originalCode)}
                                 modified={cleanCode(analysis.correctedCode)}
-                                theme="vs-dark"
+                                theme={EDITOR_THEME_NAME}
+                                beforeMount={handleEditorWillMount}
                                 options={{
                                     readOnly: true,
                                     minimap: { enabled: false },
@@ -227,7 +244,8 @@ export default function PublicAnalysis() {
                                         height="100%"
                                         language={analysis.language || "javascript"}
                                         value={cleanCode(analysis.originalCode)}
-                                        theme="vs-dark"
+                                        theme={EDITOR_THEME_NAME}
+                                        beforeMount={handleEditorWillMount}
                                         options={{ readOnly: true, minimap: { enabled: false }, fontSize: 13, fontFamily: 'Fira Code, monospace' }}
                                     />
                                 </div>
@@ -239,7 +257,8 @@ export default function PublicAnalysis() {
                                         height="100%"
                                         language={analysis.language || "javascript"}
                                         value={cleanCode(analysis.correctedCode)}
-                                        theme="vs-dark"
+                                        theme={EDITOR_THEME_NAME}
+                                        beforeMount={handleEditorWillMount}
                                         options={{ readOnly: true, minimap: { enabled: false }, fontSize: 13, fontFamily: 'Fira Code, monospace' }}
                                     />
                                 </div>
