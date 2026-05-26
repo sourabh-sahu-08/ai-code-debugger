@@ -63,40 +63,6 @@ export default function Home() {
     e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
   };
 
-  // Keyboard shortcut simulator effect
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Control") {
-        setKeysPressed((prev) => ({ ...prev, ctrl: true }));
-      }
-      if (e.key === "Enter") {
-        setKeysPressed((prev) => ({ ...prev, enter: true }));
-      }
-
-      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
-        if (!isAnalyzing && code.trim()) {
-          handleAnalyze();
-        }
-      }
-    };
-
-    const handleKeyUp = (e) => {
-      if (e.key === "Control") {
-        setKeysPressed((prev) => ({ ...prev, ctrl: false }));
-      }
-      if (e.key === "Enter") {
-        setKeysPressed((prev) => ({ ...prev, enter: false }));
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-    };
-  }, [code, isAnalyzing, isLoggedIn]);
-
   const handleAnalyze = async () => {
     if (!isLoggedIn) {
       playSound("error");
@@ -132,6 +98,40 @@ export default function Home() {
       setIsAnalyzing(false);
     }
   };
+
+  // Keyboard shortcut simulator effect
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Control") {
+        setKeysPressed((prev) => ({ ...prev, ctrl: true }));
+      }
+      if (e.key === "Enter") {
+        setKeysPressed((prev) => ({ ...prev, enter: true }));
+      }
+
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+        if (!isAnalyzing && code.trim()) {
+          handleAnalyze();
+        }
+      }
+    };
+
+    const handleKeyUp = (e) => {
+      if (e.key === "Control") {
+        setKeysPressed((prev) => ({ ...prev, ctrl: false }));
+      }
+      if (e.key === "Enter") {
+        setKeysPressed((prev) => ({ ...prev, enter: false }));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [code, isAnalyzing, isLoggedIn]);
 
   useEffect(() => {
     setIsLoggedIn(!!localStorage.getItem("token"));

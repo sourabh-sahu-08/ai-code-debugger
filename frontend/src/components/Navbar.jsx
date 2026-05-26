@@ -23,6 +23,12 @@ export default function Navbar() {
     setIsLoggedIn(!!localStorage.getItem("token"));
   }, [location.pathname]);
 
+  const applyTheme = (theme) => {
+    document.documentElement.style.setProperty("--primary-h", String(theme.h));
+    document.documentElement.style.setProperty("--primary-s", theme.s);
+    document.documentElement.style.setProperty("--primary-l", theme.l);
+  };
+
   // Load and apply theme on mount
   useEffect(() => {
     const savedIdx = localStorage.getItem("app_theme_idx");
@@ -34,12 +40,6 @@ export default function Navbar() {
       }
     }
   }, []);
-
-  const applyTheme = (theme) => {
-    document.documentElement.style.setProperty("--primary-h", String(theme.h));
-    document.documentElement.style.setProperty("--primary-s", theme.s);
-    document.documentElement.style.setProperty("--primary-l", theme.l);
-  };
 
   const handleCycleTheme = () => {
     playSound("click");
