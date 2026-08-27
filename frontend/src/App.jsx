@@ -8,6 +8,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 
+// v2 Components
+import LandingV2 from "./v2/pages/Landing";
+
 // JWT Protected Route Gate
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -34,7 +37,8 @@ export default function App() {
       />
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingV2 />} />
+        <Route path="/legacy" element={<Home />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
         <Route path="/analysis/public/:id" element={<PublicAnalysis />} />
