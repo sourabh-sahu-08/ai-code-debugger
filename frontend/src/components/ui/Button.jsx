@@ -31,7 +31,7 @@ export const Button = React.forwardRef(({
       ref={ref}
       disabled={isLoading || disabled}
       className={cn(
-        'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-violet disabled:pointer-events-none disabled:opacity-50',
+        'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-violet disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] hover:-translate-y-0.5',
         variants[variant],
         sizes[size],
         className

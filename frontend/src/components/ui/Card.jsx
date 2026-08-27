@@ -1,18 +1,56 @@
 import React from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { cn } from '../../utils/cn';
 
-export const Card = React.forwardRef(({ className, children, ...props }, ref) => {
+export const Card = React.forwardRef(({ className, children, hoverEffect = false, ...props }, ref) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['3deg', '-3deg']);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-3deg', '3deg']);
+
+  const handleMouseMove = (e) => {
+    if (!hoverEffect) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    if (!hoverEffect) return;
+    x.set(0);
+    y.set(0);
+  };
+
+  const Component = hoverEffect ? motion.div : 'div';
+  const styleProp = hoverEffect ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {};
+
   return (
-    <div
+    <Component
       ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={styleProp}
       className={cn(
-        'rounded-xl border border-border bg-surface text-text shadow-sm',
+        'rounded-xl border border-border bg-surface text-text shadow-sm relative overflow-hidden',
+        hoverEffect && 'transition-shadow hover:shadow-xl hover:shadow-primary-cyan/5 hover:border-border/80',
         className
       )}
       {...props}
     >
+      {/* Subtle top glare effect */}
+      {hoverEffect && <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent z-10" />}
       {children}
-    </div>
+    </Component>
   );
 });
 Card.displayName = 'Card';

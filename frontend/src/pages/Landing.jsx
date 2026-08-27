@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { Terminal, ChevronRight, Play, Code2, Sparkles, Lightbulb, CheckCircle2, Shield, Zap, Users, Trophy, GitBranch, Globe, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Canvas } from '@react-three/fiber';
 
 import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
 import { Skeleton } from '../components/ui/Skeleton';
+
+// Lazy load the AI Core for performance
+const AICore = React.lazy(() => import('../components/3d/AICore'));
 
 export default function Landing() {
   return (
@@ -97,8 +101,40 @@ export default function Landing() {
             </div>
 
             {/* Right Placeholder - Ready for 3D */}
-            <div className="w-full max-w-md lg:max-w-lg mx-auto relative aspect-square flex items-center justify-center border border-border/30 rounded-full bg-surface-soft/30 backdrop-blur-sm">
-              <p className="text-text-muted text-sm">[ AI Debug Core Visual Placeholder ]</p>
+            <div className="w-full max-w-md lg:max-w-lg mx-auto relative aspect-square flex items-center justify-center">
+              
+              {/* Floating UI Elements around the core */}
+              <div className="absolute inset-0 z-10 pointer-events-none hidden sm:block">
+                <motion.div 
+                  animate={{ y: [0, -10, 0] }} 
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-[10%] left-[5%] glass-card px-4 py-2 rounded-lg flex items-center gap-2 border-error-base/30 text-error-soft text-sm shadow-xl"
+                >
+                  <Zap className="w-4 h-4" /> Bug Detected
+                </motion.div>
+                <motion.div 
+                  animate={{ y: [0, 15, 0] }} 
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute bottom-[15%] right-[0%] glass-card px-4 py-2 rounded-lg flex items-center gap-2 border-success-base/30 text-success-base text-sm shadow-xl"
+                >
+                  <CheckCircle2 className="w-4 h-4" /> Root Cause Found
+                </motion.div>
+                <motion.div 
+                  animate={{ y: [0, -8, 0] }} 
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                  className="absolute top-[60%] -left-[10%] glass-card px-4 py-2 rounded-lg flex items-center gap-2 border-primary-violet/30 text-primary-violet text-sm shadow-xl"
+                >
+                  <Terminal className="w-4 h-4" /> Line 42
+                </motion.div>
+              </div>
+
+              <Suspense fallback={<div className="w-full h-full rounded-full border border-border/30 bg-surface-soft/30 animate-pulse" />}>
+                <div className="absolute inset-0">
+                  <Canvas camera={{ position: [0, 0, 5], fov: 45 }} dpr={[1, 2]} frameloop="demand">
+                    <AICore status="idle" />
+                  </Canvas>
+                </div>
+              </Suspense>
             </div>
 
           </div>
@@ -119,7 +155,7 @@ export default function Landing() {
               { step: '04', title: 'Apply & Learn', desc: 'Fix the bug and learn how to prevent it next time.' }
             ].map((s, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} viewport={{ once: true }}>
-                <Card className="h-full bg-surface-soft border-border/50 hover:border-primary-cyan/50 transition-colors">
+                <Card hoverEffect className="h-full bg-surface-soft border-border/50 transition-colors">
                   <CardHeader>
                     <div className="text-primary-violet font-mono text-xl font-bold mb-2">{s.step}</div>
                     <CardTitle>{s.title}</CardTitle>
@@ -186,7 +222,7 @@ export default function Landing() {
           </div>
           <div className="flex flex-col md:flex-row justify-center items-center gap-6">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <Card className="w-64 text-center">
+              <Card hoverEffect className="w-64 text-center">
                 <CardContent className="pt-6">
                   <Lightbulb className="w-8 h-8 mx-auto mb-4 text-yellow-500" />
                   <h4 className="font-semibold mb-2">Hint 1</h4>
@@ -196,7 +232,7 @@ export default function Landing() {
             </motion.div>
             <ChevronRight className="hidden md:block w-6 h-6 text-text-muted opacity-50" />
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} viewport={{ once: true }}>
-              <Card className="w-64 text-center">
+              <Card hoverEffect className="w-64 text-center">
                 <CardContent className="pt-6">
                   <Lightbulb className="w-8 h-8 mx-auto mb-4 text-orange-500" />
                   <h4 className="font-semibold mb-2">Hint 2</h4>
@@ -206,7 +242,7 @@ export default function Landing() {
             </motion.div>
             <ChevronRight className="hidden md:block w-6 h-6 text-text-muted opacity-50" />
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} viewport={{ once: true }}>
-              <Card className="w-64 text-center border-primary-violet/50 bg-primary-violet/5">
+              <Card hoverEffect className="w-64 text-center border-primary-violet/50 bg-primary-violet/5">
                 <CardContent className="pt-6">
                   <CheckCircle2 className="w-8 h-8 mx-auto mb-4 text-primary-violet" />
                   <h4 className="font-semibold mb-2">Solution</h4>
@@ -221,28 +257,28 @@ export default function Landing() {
         <section className="w-full max-w-7xl mx-auto px-6 py-24 border-t border-border/50">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="order-2 lg:order-1 grid grid-cols-2 gap-4">
-              <Card className="bg-surface">
+              <Card hoverEffect className="bg-surface">
                 <CardContent className="pt-6">
                   <Code2 className="w-6 h-6 mb-3 text-primary-cyan" />
                   <h4 className="font-semibold mb-1">Readability</h4>
                   <p className="text-xs text-text-muted">Is your code clean and understandable?</p>
                 </CardContent>
               </Card>
-              <Card className="bg-surface">
+              <Card hoverEffect className="bg-surface">
                 <CardContent className="pt-6">
                   <Zap className="w-6 h-6 mb-3 text-yellow-500" />
                   <h4 className="font-semibold mb-1">Performance</h4>
                   <p className="text-xs text-text-muted">Are there bottlenecks or memory leaks?</p>
                 </CardContent>
               </Card>
-              <Card className="bg-surface">
+              <Card hoverEffect className="bg-surface">
                 <CardContent className="pt-6">
                   <Shield className="w-6 h-6 mb-3 text-error-base" />
                   <h4 className="font-semibold mb-1">Security</h4>
                   <p className="text-xs text-text-muted">Vulnerability & injection checks.</p>
                 </CardContent>
               </Card>
-              <Card className="bg-surface">
+              <Card hoverEffect className="bg-surface">
                 <CardContent className="pt-6">
                   <CheckCircle2 className="w-6 h-6 mb-3 text-success-base" />
                   <h4 className="font-semibold mb-1">Maintainability</h4>
@@ -266,7 +302,7 @@ export default function Landing() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <Card className="h-full bg-surface/50 border-border/50">
+              <Card hoverEffect className="h-full bg-surface/50 border-border/50">
                 <CardHeader>
                   <Users className="w-8 h-8 text-primary-violet mb-2" />
                   <CardTitle className="text-2xl">Peer Learning</CardTitle>
@@ -289,7 +325,7 @@ export default function Landing() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} viewport={{ once: true }}>
-              <Card className="h-full bg-surface/50 border-border/50">
+              <Card hoverEffect className="h-full bg-surface/50 border-border/50">
                 <CardHeader>
                   <Trophy className="w-8 h-8 text-yellow-500 mb-2" />
                   <CardTitle className="text-2xl">Daily Challenges</CardTitle>

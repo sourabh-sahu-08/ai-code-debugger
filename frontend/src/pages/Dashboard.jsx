@@ -24,7 +24,7 @@ export default function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="bg-surface/30 border-border/50">
+        <Card hoverEffect className="glass-card">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-text-muted">Bugs Fixed</span>
@@ -37,7 +37,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
         
-        <Card className="bg-surface/30 border-border/50">
+        <Card hoverEffect className="glass-card">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-text-muted">Debug Streak</span>
@@ -48,7 +48,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-surface/30 border-border/50">
+        <Card hoverEffect className="glass-card">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-text-muted">Resolution Rate</span>
@@ -59,7 +59,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-surface/30 border-border/50">
+        <Card hoverEffect className="glass-card">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-text-muted">Total XP</span>
@@ -80,13 +80,23 @@ export default function Dashboard() {
         <div className="lg:col-span-2 space-y-8">
           
           {/* AI Insights Card */}
-          <Card className="bg-gradient-to-br from-primary-base/10 to-surface border-primary-base/20">
-            <CardHeader>
+          <Card hoverEffect className="relative overflow-hidden bg-gradient-to-br from-primary-base/10 to-surface border-primary-base/20">
+            {/* Neural SVG Decoration */}
+            <svg className="absolute right-0 top-0 w-64 h-full opacity-20 pointer-events-none" viewBox="0 0 200 100">
+              <path d="M50,50 L100,20 L150,50 L100,80 Z" fill="none" stroke="currentColor" className="text-primary-cyan" strokeWidth="1" />
+              <circle cx="50" cy="50" r="4" fill="currentColor" className="text-primary-cyan animate-pulse" />
+              <circle cx="100" cy="20" r="4" fill="currentColor" className="text-primary-cyan animate-pulse" style={{ animationDelay: '0.2s' }} />
+              <circle cx="150" cy="50" r="4" fill="currentColor" className="text-primary-cyan animate-pulse" style={{ animationDelay: '0.4s' }} />
+              <circle cx="100" cy="80" r="4" fill="currentColor" className="text-primary-cyan animate-pulse" style={{ animationDelay: '0.6s' }} />
+              <path d="M100,20 L100,80 M50,50 L150,50" fill="none" stroke="currentColor" className="text-primary-violet opacity-50" strokeWidth="0.5" />
+            </svg>
+            
+            <CardHeader className="relative z-10">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Zap className="w-5 h-5 text-yellow-400" /> AI Insight
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="relative z-10">
               <p className="text-white/90">
                 "You frequently encounter asynchronous JavaScript errors inside `useEffect` hooks. I recommend reviewing React's documentation on data fetching and cleanup functions to avoid memory leaks and stale closures."
               </p>
@@ -97,7 +107,7 @@ export default function Dashboard() {
           </Card>
 
           {/* Recent Sessions */}
-          <Card className="border-border/50">
+          <Card hoverEffect className="border-border/50">
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
                 <CardTitle className="text-lg">Recent Sessions</CardTitle>
@@ -138,7 +148,7 @@ export default function Dashboard() {
 
         {/* Right Column: Daily Challenge */}
         <div className="space-y-8">
-          <Card className="border-border/50 bg-surface/50 overflow-hidden relative">
+          <Card hoverEffect className="border-border/50 bg-surface/50 overflow-hidden relative">
             <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full blur-[40px]" />
             <CardHeader>
               <div className="flex items-center gap-2 mb-2">
