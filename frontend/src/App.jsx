@@ -8,6 +8,10 @@ import Dashboard from './pages/Dashboard';
 import DebugWorkspace from './components/debugger/DebugWorkspace';
 import Projects from './pages/projects/Projects';
 import DebugHistory from './pages/history/DebugHistory';
+import Friends from './pages/friends/Friends';
+import Learn from './pages/learn/Learn';
+import Challenges from './pages/challenges/Challenges';
+import Achievements from './pages/achievements/Achievements';
 
 function App() {
   return (
@@ -33,11 +37,14 @@ function App() {
       {/* Placeholders for remaining dashboard routes */}
       <Route path="/projects" element={<DashboardLayout><Projects /></DashboardLayout>} />
       <Route path="/history" element={<DashboardLayout><DebugHistory /></DashboardLayout>} />
-      <Route path="/learn" element={<DashboardLayout><div className="p-8 text-white">Learn Coming Soon</div></DashboardLayout>} />
-      <Route path="/challenges" element={<DashboardLayout><div className="p-8 text-white">Challenges Coming Soon</div></DashboardLayout>} />
-      <Route path="/friends" element={<DashboardLayout><div className="p-8 text-white">Friends Coming Soon</div></DashboardLayout>} />
+      
+      {/* Gamification Routes */}
+      <Route path="/learn" element={<DashboardLayout><Learn /></DashboardLayout>} />
+      <Route path="/challenges" element={<DashboardLayout><Challenges /></DashboardLayout>} />
+      <Route path="/achievements" element={<DashboardLayout><Achievements /></DashboardLayout>} />
+      
+      <Route path="/friends" element={<DashboardLayout><Friends /></DashboardLayout>} />
       <Route path="/community" element={<DashboardLayout><div className="p-8 text-white">Community Coming Soon</div></DashboardLayout>} />
-      <Route path="/achievements" element={<DashboardLayout><div className="p-8 text-white">Achievements Coming Soon</div></DashboardLayout>} />
       <Route path="/profile" element={<DashboardLayout><div className="p-8 text-white">Profile Coming Soon</div></DashboardLayout>} />
       <Route path="/settings" element={<DashboardLayout><div className="p-8 text-white">Settings Coming Soon</div></DashboardLayout>} />
     </Routes>
