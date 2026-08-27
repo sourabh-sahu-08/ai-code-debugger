@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, AlertTriangle, Lightbulb, ChevronRight, CheckCircle2, Bot, Info } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { Badge } from '../components/ui/Badge';
+import { Badge } from '../ui/Badge';
 
 export default function AIAssistant({ analysisState, analysisData, onAnalyze }) {
   
