@@ -35,8 +35,12 @@ app.use(helmet());
 // Enable CORS
 app.use(cors());
 
-// Mount routers
+const auth = require('./routes/auth');
+const analyze = require('./routes/analyze');
+
+// Mount routes
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/analyze', analyze);
 
 // Error handler middleware
 app.use(errorHandler);
