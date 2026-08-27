@@ -39,6 +39,32 @@ Your JSON must strictly match this structure:
 };
 
 exports.analyzeCode = async (code, language = 'javascript', mode = 'quick-fix') => {
+  // Return a beautiful mock response if no API key is provided, allowing UI testing
+  if (!process.env.GROQ_API_KEY || process.env.GROQ_API_KEY === 'dummy_key') {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          summary: "Mock: Unhandled Promise Rejection",
+          severity: "high",
+          issues: [
+            {
+              title: "Missing Catch Block",
+              description: "The promise chain lacks a catch block to handle potential errors.",
+              lineStart: 1,
+              lineEnd: 5
+            }
+          ],
+          affectedLines: [3, 4],
+          rootCause: "When an asynchronous operation fails, the rejection must be explicitly handled. Since this code doesn't provide a .catch() or use try/catch in an async function, the Node process will crash or the browser will throw an uncaught exception.",
+          explanation: "Think of a Promise like ordering a pizza. You expect it to arrive (resolve), but sometimes the delivery driver gets lost (reject). If you don't have a plan for what to do when it gets lost (a catch block), you'll just wait forever and starve! Always handle the failure case.",
+          suggestedFix: "fetch('/api/data')\n  .then(res => res.json())\n  .then(data => console.log(data))\n  .catch(err => console.error('Failed to fetch:', err));",
+          whyFixWorks: "Adding the .catch() block ensures that any network errors or parsing errors are gracefully logged instead of crashing the application.",
+          preventionTips: ["Always append .catch() to Promise chains", "Use async/await with try/catch blocks for better readability"]
+        });
+      }, 1500);
+    });
+  }
+
   try {
     const chatCompletion = await groq.chat.completions.create({
       messages: [

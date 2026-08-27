@@ -13,7 +13,15 @@ exports.analyzeCode = asyncHandler(async (req, res, next) => {
 
   const analysis = await aiService.analyzeCode(code, language, mode);
 
-  // TODO: Save this analysis to DebugSession history for the logged-in user
+  const DebugSession = require('../models/DebugSession');
+  
+  await DebugSession.create({
+    user: req.user.id,
+    code,
+    language,
+    aiResponse: analysis,
+    status: 'Open'
+  });
 
   res.status(200).json({
     success: true,
