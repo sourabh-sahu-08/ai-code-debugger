@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 
 // v2 Components
 import LandingV2 from "./v2/pages/Landing";
+import DebuggerV2 from "./v2/pages/DebuggerV2";
 
 // JWT Protected Route Gate
 function ProtectedRoute({ children }) {
@@ -44,6 +45,8 @@ export default function App() {
         <Route path="/analysis/public/:id" element={<PublicAnalysis />} />
 
         {/* Secure Developer Workspace Routes */}
+        <Route path="/v2/debugger" element={<DebuggerV2 />} />
+        
         <Route
           path="/dashboard"
           element={
