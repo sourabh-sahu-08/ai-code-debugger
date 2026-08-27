@@ -6,6 +6,8 @@ import Register from './pages/auth/Register';
 import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './pages/Dashboard';
 import DebugWorkspace from './components/debugger/DebugWorkspace';
+import Projects from './pages/projects/Projects';
+import DebugHistory from './pages/history/DebugHistory';
 
 function App() {
   return (
@@ -29,8 +31,8 @@ function App() {
       } />
       
       {/* Placeholders for remaining dashboard routes */}
-      <Route path="/projects" element={<DashboardLayout><div className="p-8 text-white">Projects Coming Soon</div></DashboardLayout>} />
-      <Route path="/history" element={<DashboardLayout><div className="p-8 text-white">Debug History Coming Soon</div></DashboardLayout>} />
+      <Route path="/projects" element={<DashboardLayout><Projects /></DashboardLayout>} />
+      <Route path="/history" element={<DashboardLayout><DebugHistory /></DashboardLayout>} />
       <Route path="/learn" element={<DashboardLayout><div className="p-8 text-white">Learn Coming Soon</div></DashboardLayout>} />
       <Route path="/challenges" element={<DashboardLayout><div className="p-8 text-white">Challenges Coming Soon</div></DashboardLayout>} />
       <Route path="/friends" element={<DashboardLayout><div className="p-8 text-white">Friends Coming Soon</div></DashboardLayout>} />
