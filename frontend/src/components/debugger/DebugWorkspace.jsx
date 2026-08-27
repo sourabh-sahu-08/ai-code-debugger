@@ -83,41 +83,71 @@ export default function DebugWorkspace() {
     }
   };
 
+  // Dynamic glow color based on analysis state
+  const getGlowColor = () => {
+    switch (analysisState) {
+      case 'analyzing': return 'shadow-[0_0_40px_-10px_rgba(37,99,235,0.4)] border-primary-base/50';
+      case 'error': return 'shadow-[0_0_40px_-10px_rgba(220,38,38,0.4)] border-error-base/50';
+      case 'success': return 'shadow-[0_0_40px_-10px_rgba(5,150,105,0.4)] border-success-base/50';
+      default: return 'shadow-none border-border/30';
+    }
+  };
+
   return (
-    <div className="flex h-full w-full bg-background overflow-hidden relative">
-      <FileExplorer 
-        files={files} 
-        activeFile={activeFileId} 
-        onSelectFile={setActiveFileId} 
-      />
+    <div className="flex h-[calc(100vh-88px)] w-full bg-transparent overflow-hidden relative p-4 gap-4">
+      {/* Background Decorators */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary-base/5 rounded-full blur-[100px] mix-blend-screen" />
+      </div>
+
+      {/* File Explorer (Left Panel) - Glass styling */}
+      <div className="h-full z-10 hidden md:block rounded-xl overflow-hidden glass-card shadow-2xl flex-shrink-0">
+        <FileExplorer 
+          files={files} 
+          activeFile={activeFileId} 
+          onSelectFile={setActiveFileId} 
+        />
+      </div>
       
-      <div className="flex flex-col flex-1 h-full min-w-0">
-        {/* Editor Tabs */}
-        <div className="h-12 bg-surface border-b border-border flex items-center px-2 flex-shrink-0">
+      {/* Editor Center Stage (Flat Monaco wrapped in 3D frame) */}
+      <div className={`flex flex-col flex-1 h-full min-w-0 z-10 rounded-xl overflow-hidden glass-card border transition-all duration-700 ${getGlowColor()}`}>
+        
+        {/* Editor Toolbar / Frame Header */}
+        <div className="h-12 bg-surface-strong/80 backdrop-blur-md border-b border-border/50 flex items-center px-2 flex-shrink-0 shadow-inner">
+          <div className="flex items-center gap-1.5 px-3 mr-4">
+            <div className="w-3 h-3 rounded-full bg-error-base/80 shadow-sm" />
+            <div className="w-3 h-3 rounded-full bg-yellow-500/80 shadow-sm" />
+            <div className="w-3 h-3 rounded-full bg-success-base/80 shadow-sm" />
+          </div>
           {files.map(file => (
             <button
               key={file.id}
               onClick={() => setActiveFileId(file.id)}
-              className={`px-4 h-full flex items-center text-sm border-r border-border min-w-[120px] transition-colors ${activeFileId === file.id ? 'bg-background text-primary-cyan border-t-2 border-t-primary-cyan' : 'text-text-muted hover:bg-surface-hover hover:text-white border-t-2 border-t-transparent'}`}
+              className={`px-5 h-[80%] rounded-md flex items-center text-sm min-w-[120px] transition-all duration-300 font-medium ${activeFileId === file.id ? 'bg-background shadow-md text-primary-cyan border border-primary-cyan/20' : 'text-text-muted hover:bg-surface-hover hover:text-white border border-transparent'}`}
             >
               {file.name}
             </button>
           ))}
         </div>
 
-        {/* Editor Instance */}
-        <CodeEditor 
-          file={activeFile} 
-          onChange={handleEditorChange} 
-          onAnalyze={handleAnalyze} 
-        />
+        {/* Flat Monaco Instance */}
+        <div className="flex-1 bg-background relative z-0">
+          <CodeEditor 
+            file={activeFile} 
+            onChange={handleEditorChange} 
+            onAnalyze={handleAnalyze} 
+          />
+        </div>
       </div>
 
-      <AIAssistant 
-        analysisState={analysisState} 
-        analysisData={analysisData}
-        onAnalyze={() => handleAnalyze(activeFile?.content)}
-      />
+      {/* AI Assistant (Right Panel) - Glass styling */}
+      <div className="h-full z-10 hidden lg:block rounded-xl overflow-hidden glass-card shadow-2xl flex-shrink-0 relative">
+        <AIAssistant 
+          analysisState={analysisState} 
+          analysisData={analysisData}
+          onAnalyze={() => handleAnalyze(activeFile?.content)}
+        />
+      </div>
     </div>
   );
 }
