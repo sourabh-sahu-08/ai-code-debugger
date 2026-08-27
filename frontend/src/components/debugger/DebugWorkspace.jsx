@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { io } from 'socket.io-client';
 import FileExplorer from './FileExplorer';
 import CodeEditor from './CodeEditor';
 import AIAssistant from './AIAssistant';
@@ -17,11 +18,38 @@ export default function DebugWorkspace() {
   const [activeFileId, setActiveFileId] = useState('1');
   const [analysisState, setAnalysisState] = useState('idle'); // 'idle' | 'analyzing' | 'success' | 'error'
   const [analysisData, setAnalysisData] = useState(null);
+  
+  const socketRef = useRef(null);
+  const roomId = 'shared-workspace-123'; // Mock room ID for demo
+
+  useEffect(() => {
+    // Connect to Socket.io server
+    socketRef.current = io('http://localhost:5000');
+    
+    socketRef.current.on('connect', () => {
+      socketRef.current.emit('join_room', roomId);
+    });
+
+    socketRef.current.on('receive_code_change', (data) => {
+      setFiles(prev => prev.map(f => f.id === data.fileId ? { ...f, content: data.content } : f));
+    });
+
+    return () => {
+      socketRef.current.disconnect();
+    };
+  }, []);
 
   const activeFile = files.find(f => f.id === activeFileId);
 
   const handleEditorChange = (id, newContent) => {
     setFiles(files.map(f => f.id === id ? { ...f, content: newContent } : f));
+    
+    // Broadcast change
+    socketRef.current.emit('code_change', {
+      roomId,
+      fileId: id,
+      content: newContent
+    });
   };
 
   const handleAnalyze = async (code) => {

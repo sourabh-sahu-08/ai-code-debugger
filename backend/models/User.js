@@ -49,6 +49,21 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  friends: [{
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  }],
+  friendRequests: [{
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User'
+    },
+    status: {
+      type: String,
+      enum: ['pending', 'accepted', 'rejected'],
+      default: 'pending'
+    }
+  }],
   preferredLanguages: {
     type: [String]
   },
