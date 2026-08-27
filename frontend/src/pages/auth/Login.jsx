@@ -80,7 +80,7 @@ export default function Login() {
                   name="email" 
                   type="email" 
                   required 
-                  leftIcon={<Mail className="w-4 h-4 text-text-muted" />}
+                  leftIcon={Mail}
                   placeholder="developer@example.com"
                   value={formData.email}
                   onChange={handleChange}
@@ -99,7 +99,7 @@ export default function Login() {
                   name="password" 
                   type="password" 
                   required 
-                  leftIcon={<Lock className="w-4 h-4 text-text-muted" />}
+                  leftIcon={Lock}
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={handleChange}

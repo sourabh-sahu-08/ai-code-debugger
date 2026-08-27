@@ -39,7 +39,7 @@ export default function Friends() {
           placeholder="Search friends by name or username..." 
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          leftIcon={<Search className="w-4 h-4 text-text-muted" />}
+          leftIcon={Search}
         />
       </div>
 

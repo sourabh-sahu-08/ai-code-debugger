@@ -80,7 +80,7 @@ export default function Register() {
                   name="name" 
                   type="text" 
                   required 
-                  leftIcon={<User className="w-4 h-4 text-text-muted" />}
+                  leftIcon={User}
                   placeholder="John Doe"
                   value={formData.name}
                   onChange={handleChange}
@@ -91,7 +91,7 @@ export default function Register() {
                   name="username" 
                   type="text" 
                   required 
-                  leftIcon={<AtSign className="w-4 h-4 text-text-muted" />}
+                  leftIcon={AtSign}
                   placeholder="johndoe"
                   value={formData.username}
                   onChange={handleChange}
@@ -104,7 +104,7 @@ export default function Register() {
                 name="email" 
                 type="email" 
                 required 
-                leftIcon={<Mail className="w-4 h-4 text-text-muted" />}
+                leftIcon={Mail}
                 placeholder="developer@example.com"
                 value={formData.email}
                 onChange={handleChange}
@@ -116,7 +116,7 @@ export default function Register() {
                 name="password" 
                 type="password" 
                 required 
-                leftIcon={<Lock className="w-4 h-4 text-text-muted" />}
+                leftIcon={Lock}
                 placeholder="••••••••"
                 value={formData.password}
                 onChange={handleChange}
