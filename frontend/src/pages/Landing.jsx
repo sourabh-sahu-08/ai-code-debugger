@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Terminal, ChevronRight, Play, Code2, Sparkles, Lightbulb, CheckCircle2, Shield, Zap, Users, Trophy, Github, Twitter, MessageSquare } from 'lucide-react';
+import { Terminal, ChevronRight, Play, Code2, Sparkles, Lightbulb, CheckCircle2, Shield, Zap, Users, Trophy, GitBranch, Globe, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import { Button } from '../components/ui/Button';
@@ -375,10 +375,10 @@ export default function Landing() {
           </p>
           <div className="flex items-center gap-4">
             <a href="#" className="text-text-muted hover:text-white transition-colors">
-              <Twitter className="w-5 h-5" />
+              <Globe className="w-5 h-5" />
             </a>
             <a href="#" className="text-text-muted hover:text-white transition-colors">
-              <Github className="w-5 h-5" />
+              <GitBranch className="w-5 h-5" />
             </a>
             <a href="#" className="text-text-muted hover:text-white transition-colors">
               <MessageSquare className="w-5 h-5" />
