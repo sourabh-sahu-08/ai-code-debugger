@@ -35,7 +35,6 @@ app.use(helmet());
 // Enable CORS
 app.use(cors());
 
-const auth = require('./routes/auth');
 const analyze = require('./routes/analyze');
 
 // Mount routes
