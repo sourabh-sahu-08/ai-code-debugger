@@ -5,6 +5,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './pages/Dashboard';
+import DebugWorkspace from './components/debugger/DebugWorkspace';
 
 function App() {
   return (
@@ -21,8 +22,13 @@ function App() {
         </DashboardLayout>
       } />
       
+      <Route path="/debugger" element={
+        <DashboardLayout>
+          <DebugWorkspace />
+        </DashboardLayout>
+      } />
+      
       {/* Placeholders for remaining dashboard routes */}
-      <Route path="/debugger" element={<DashboardLayout><div className="p-8 text-white">Debugger Workspace Coming Soon</div></DashboardLayout>} />
       <Route path="/projects" element={<DashboardLayout><div className="p-8 text-white">Projects Coming Soon</div></DashboardLayout>} />
       <Route path="/history" element={<DashboardLayout><div className="p-8 text-white">Debug History Coming Soon</div></DashboardLayout>} />
       <Route path="/learn" element={<DashboardLayout><div className="p-8 text-white">Learn Coming Soon</div></DashboardLayout>} />
