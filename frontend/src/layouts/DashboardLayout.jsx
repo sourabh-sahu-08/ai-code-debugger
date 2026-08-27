@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { Avatar } from '../components/ui/Avatar';
+import { CommandPalette } from '../components/ui/CommandPalette';
 
 const navItems = [
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
@@ -43,9 +44,10 @@ export default function DashboardLayout({ children }) {
   const toggleMobile = () => setMobileOpen(!mobileOpen);
 
   return (
-    <div className="flex h-screen bg-[var(--background)] text-[var(--text)] overflow-hidden">
+    <div className="min-h-screen bg-background flex overflow-hidden">
+      <CommandPalette />
       
-      {/* Mobile Header */}
+      {/* Mobile Drawer Overlay */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 border-b border-border bg-background z-40 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <Terminal className="w-5 h-5 text-primary-cyan" />
