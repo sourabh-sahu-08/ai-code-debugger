@@ -24,23 +24,35 @@ export default function DebugWorkspace() {
     setFiles(files.map(f => f.id === id ? { ...f, content: newContent } : f));
   };
 
-  const handleAnalyze = (code) => {
+  const handleAnalyze = async (code) => {
     if (!code) return;
     
     setAnalysisState('analyzing');
     
-    // Simulate API call for now (Phase 7 will connect the real backend)
-    setTimeout(() => {
-      setAnalysisData({
-        summary: "Infinite Re-render Loop Detected",
-        severity: "high",
-        affectedLines: [8],
-        rootCause: "The useEffect hook is missing a dependency array. Without it, the effect runs after every single render.",
-        explanation: "Because the effect calls setData (updating state), it triggers another render, which triggers the effect again, resulting in an infinite loop that will crash the browser.",
-        suggestedFix: "  useEffect(() => {\n    fetch('/api/data')\n      .then(res => res.json())\n      .then(setData);\n  }, []); // Added empty dependency array",
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch('http://localhost:5000/api/v1/analyze', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': \`Bearer \${token}\`
+        },
+        body: JSON.stringify({ 
+          code, 
+          language: activeFile?.language || 'javascript',
+          mode: 'quick-fix'
+        }),
       });
+      
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error || 'Analysis failed');
+      
+      setAnalysisData(data.data);
       setAnalysisState('success');
-    }, 2000);
+    } catch (error) {
+      console.error(error);
+      setAnalysisState('error');
+    }
   };
 
   return (
