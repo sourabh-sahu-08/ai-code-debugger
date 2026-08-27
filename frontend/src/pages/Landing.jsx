@@ -130,7 +130,17 @@ export default function Landing() {
 
               <Suspense fallback={<div className="w-full h-full rounded-full border border-border/30 bg-surface-soft/30 animate-pulse" />}>
                 <div className="absolute inset-0">
-                  <Canvas camera={{ position: [0, 0, 5], fov: 45 }} dpr={[1, 2]} frameloop="demand">
+                  <Canvas 
+                    camera={{ position: [0, 0, 5], fov: 45 }} 
+                    dpr={[1, 2]} 
+                    fallback={
+                      <div className="w-full h-full flex items-center justify-center bg-surface-soft/30 rounded-full border border-border/30">
+                        <span className="text-text-muted text-sm flex items-center gap-2">
+                          <Terminal className="w-4 h-4" /> AI Core Offline
+                        </span>
+                      </div>
+                    }
+                  >
                     <AICore status="idle" />
                   </Canvas>
                 </div>

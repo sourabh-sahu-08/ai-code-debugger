@@ -1,6 +1,6 @@
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Sphere, Icosahedron, Line, Points, PointMaterial } from '@react-three/drei';
+import { Sphere, Icosahedron } from '@react-three/drei';
 import * as THREE from 'three';
 
 // State-driven color logic
@@ -26,12 +26,10 @@ function Rings({ status }) {
 
   return (
     <group ref={groupRef}>
-      {/* Outer Ring */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[2.5, 0.01, 16, 64]} />
         <meshBasicMaterial color="#ffffff" transparent opacity={0.15} />
       </mesh>
-      {/* Inner Ring (Tilted) */}
       <mesh rotation={[Math.PI / 3, Math.PI / 4, 0]}>
         <torusGeometry args={[1.8, 0.01, 16, 64]} />
         <meshBasicMaterial color="#ffffff" transparent opacity={0.25} />
@@ -43,22 +41,19 @@ function Rings({ status }) {
 function AmbientParticles({ count = 50 }) {
   const pointsRef = useRef();
   
-  const [positions, phases] = useMemo(() => {
+  const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
-    const ph = new Float32Array(count);
     for (let i = 0; i < count; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 8;
       pos[i * 3 + 1] = (Math.random() - 0.5) * 8;
       pos[i * 3 + 2] = (Math.random() - 0.5) * 8;
-      ph[i] = Math.random() * Math.PI * 2;
     }
-    return [pos, ph];
+    return pos;
   }, [count]);
 
   useFrame((state) => {
     if (!pointsRef.current) return;
     pointsRef.current.rotation.y = state.clock.elapsedTime * 0.05;
-    // Gentle bobbing could be added in a custom shader, keeping it simple here for perf
   });
 
   return (
@@ -71,7 +66,14 @@ function AmbientParticles({ count = 50 }) {
           itemSize={3}
         />
       </bufferGeometry>
-      <PointMaterial transparent color="#06b6d4" size={0.05} sizeAttenuation={true} depthWrite={false} opacity={0.4} />
+      <pointsMaterial 
+        transparent 
+        color="#06b6d4" 
+        size={0.05} 
+        sizeAttenuation={true} 
+        depthWrite={false} 
+        opacity={0.4} 
+      />
     </points>
   );
 }
@@ -79,18 +81,20 @@ function AmbientParticles({ count = 50 }) {
 export default function AICore({ status = 'idle' }) {
   const coreRef = useRef();
   const auraRef = useRef();
-  const colors = getCoreColors(status);
   
-  // Smoothly interpolate colors
-  useFrame((state, delta) => {
+  const colors = getCoreColors(status);
+  // Keep colors stable in a ref or memo so we don't recreate them every frame
+  const targetCoreColor = useMemo(() => new THREE.Color(colors.core), [colors.core]);
+  const targetAuraColor = useMemo(() => new THREE.Color(colors.aura), [colors.aura]);
+  
+  useFrame((state) => {
     if (coreRef.current) {
-      coreRef.current.material.color.lerp(new THREE.Color(colors.core), 0.05);
-      // Gentle floating
+      coreRef.current.material.color.lerp(targetCoreColor, 0.05);
       coreRef.current.position.y = Math.sin(state.clock.elapsedTime) * 0.1;
       coreRef.current.rotation.y += 0.005;
     }
     if (auraRef.current) {
-      auraRef.current.material.color.lerp(new THREE.Color(colors.aura), 0.05);
+      auraRef.current.material.color.lerp(targetAuraColor, 0.05);
       auraRef.current.position.y = Math.sin(state.clock.elapsedTime) * 0.1;
     }
   });
@@ -98,12 +102,11 @@ export default function AICore({ status = 'idle' }) {
   return (
     <group>
       {/* Inner Dense Core */}
-      <Icosahedron ref={coreRef} args={[0.8, 1]} receiveShadow castShadow>
+      <Icosahedron ref={coreRef} args={[0.8, 1]}>
         <meshStandardMaterial 
           color={colors.core} 
           roughness={0.2} 
           metalness={0.8}
-          wireframe={false} 
         />
       </Icosahedron>
 
@@ -118,13 +121,9 @@ export default function AICore({ status = 'idle' }) {
         />
       </Sphere>
 
-      {/* Orbiting Rings */}
       <Rings status={status} />
-
-      {/* Lightweight Particles */}
       <AmbientParticles count={80} />
       
-      {/* Lighting */}
       <ambientLight intensity={0.5} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
       <pointLight position={[-5, -5, -5]} color={colors.core} intensity={2} distance={10} />
