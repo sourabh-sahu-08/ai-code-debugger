@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bug, Flame, Target, Trophy, ArrowRight, Activity, Code2, Zap } from 'lucide-react';
+import { Bug, Flame, Target, Trophy, ArrowRight, Activity, Code2, Zap, Terminal } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
