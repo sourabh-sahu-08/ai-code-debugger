@@ -36,10 +36,14 @@ app.use(helmet());
 app.use(cors());
 
 const analyze = require('./routes/analyze');
+const project = require('./routes/project');
+const history = require('./routes/history');
 
 // Mount routes
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/analyze', analyze);
+app.use('/api/v1/projects', project);
+app.use('/api/v1/history', history);
 
 // Error handler middleware
 app.use(errorHandler);
