@@ -100,51 +100,72 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Right Placeholder - Ready for 3D */}
-            <div className="w-full max-w-md lg:max-w-lg mx-auto relative aspect-square flex items-center justify-center">
+            {/* Premium AI Core Visual Container */}
+            <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg mx-auto relative aspect-square flex items-center justify-center">
               
-              {/* Floating UI Elements around the core */}
+              {/* Subtle dark glowing background for the container */}
+              <div 
+                className="absolute inset-4 rounded-full pointer-events-none"
+                style={{
+                  background: 'radial-gradient(circle at center, rgba(6,182,212,0.08) 0%, rgba(139,92,246,0.03) 40%, transparent 70%)',
+                  boxShadow: 'inset 0 0 60px rgba(0,0,0,0.5)'
+                }}
+              />
+
+              {/* Floating UI Elements perfectly anchored to the container */}
               <div className="absolute inset-0 z-10 pointer-events-none hidden sm:block">
                 <motion.div 
                   animate={{ y: [0, -10, 0] }} 
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute top-[10%] left-[5%] glass-card px-4 py-2 rounded-lg flex items-center gap-2 border-error-base/30 text-error-soft text-sm shadow-xl"
+                  className="absolute top-[12%] right-[5%] glass-card px-4 py-2 rounded-lg flex items-center gap-2 border-error-base/30 text-error-soft text-sm shadow-xl"
                 >
                   <Zap className="w-4 h-4" /> Bug Detected
                 </motion.div>
+                
                 <motion.div 
-                  animate={{ y: [0, 15, 0] }} 
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute bottom-[15%] right-[0%] glass-card px-4 py-2 rounded-lg flex items-center gap-2 border-success-base/30 text-success-base text-sm shadow-xl"
+                  animate={{ y: [0, 8, 0] }} 
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute bottom-[18%] right-[10%] glass-card px-4 py-2 rounded-lg flex items-center gap-2 border-success-base/30 text-success-base text-sm shadow-xl"
                 >
                   <CheckCircle2 className="w-4 h-4" /> Root Cause Found
                 </motion.div>
+                
                 <motion.div 
                   animate={{ y: [0, -8, 0] }} 
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                  className="absolute top-[60%] -left-[10%] glass-card px-4 py-2 rounded-lg flex items-center gap-2 border-primary-violet/30 text-primary-violet text-sm shadow-xl"
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                  className="absolute top-[50%] -left-[5%] glass-card px-4 py-2 rounded-lg flex items-center gap-2 border-primary-violet/30 text-primary-violet text-sm shadow-xl"
                 >
                   <Terminal className="w-4 h-4" /> Line 42
                 </motion.div>
               </div>
 
-              <Suspense fallback={<div className="w-full h-full rounded-full border border-border/30 bg-surface-soft/30 animate-pulse" />}>
-                <div className="absolute inset-0">
+              {/* The 3D Canvas itself, completely transparent and robust */}
+              <div className="absolute inset-0 z-0">
+                <Suspense 
+                  fallback={
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-[60%] h-[60%] rounded-full border border-primary-cyan/20 bg-primary-cyan/5 animate-pulse" />
+                    </div>
+                  }
+                >
                   <Canvas 
                     camera={{ position: [0, 0, 5], fov: 45 }} 
                     dpr={[1, 2]} 
+                    gl={{ alpha: true, antialias: true }}
+                    style={{ background: 'transparent' }}
                     fallback={
-                      <div className="w-full h-full flex items-center justify-center bg-surface-soft/30 rounded-full border border-border/30">
-                        <span className="text-text-muted text-sm flex items-center gap-2">
-                          <Terminal className="w-4 h-4" /> AI Core Offline
-                        </span>
+                      <div className="w-full h-full flex items-center justify-center">
+                        <div className="w-[60%] h-[60%] rounded-full border border-border/30 bg-surface-soft/50 flex flex-col items-center justify-center text-text-muted">
+                          <Sparkles className="w-8 h-8 mb-2 opacity-50" />
+                          <span className="text-xs">AI Core Active</span>
+                        </div>
                       </div>
                     }
                   >
                     <AICore status="idle" />
                   </Canvas>
-                </div>
-              </Suspense>
+                </Suspense>
+              </div>
             </div>
 
           </div>
