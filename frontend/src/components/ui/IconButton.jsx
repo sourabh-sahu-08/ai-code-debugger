@@ -11,10 +11,10 @@ export const IconButton = React.forwardRef(({
   ...props
 }, ref) => {
   const variants = {
-    primary: 'bg-primary-violet text-white hover:opacity-90',
+    primary: 'bg-primary-violet text-text hover:opacity-90',
     secondary: 'bg-surface border border-border text-text hover:bg-surface-hover',
     ghost: 'bg-transparent text-text-muted hover:text-text hover:bg-surface',
-    danger: 'bg-error-base text-white hover:opacity-90',
+    danger: 'bg-error-base text-text hover:opacity-90',
   };
 
   const sizes = {

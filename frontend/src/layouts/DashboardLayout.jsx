@@ -50,10 +50,10 @@ export default function DashboardLayout({ children }) {
       {/* Mobile Drawer Overlay */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 border-b border-border bg-background z-40 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
-          <Terminal className="w-5 h-5 text-white" />
+          <Terminal className="w-5 h-5 text-text" />
           <span className="font-bold text-lg">KhudSeKrle</span>
         </div>
-        <button onClick={toggleMobile} className="p-2 text-text-muted hover:text-white">
+        <button onClick={toggleMobile} className="p-2 text-text-muted hover:text-text">
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
@@ -73,7 +73,7 @@ export default function DashboardLayout({ children }) {
                 exit={{ opacity: 0, x: -10 }}
                 className="flex items-center gap-2 overflow-hidden"
               >
-                <Terminal className="w-6 h-6 text-white flex-shrink-0" />
+                <Terminal className="w-6 h-6 text-text flex-shrink-0" />
                 <span className="font-bold text-xl tracking-tight whitespace-nowrap">KhudSeKrle</span>
               </motion.div>
             )}
@@ -97,11 +97,11 @@ export default function DashboardLayout({ children }) {
                 to={item.path}
                 className={cn(
                   "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors group relative overflow-hidden",
-                  isActive ? "bg-primary-base/10 text-white" : "text-text-muted hover:text-white hover:bg-surface-hover"
+                  isActive ? "bg-primary-soft text-primary-base" : "text-text-muted hover:text-text hover:bg-surface-hover"
                 )}
                 title={isCollapsed ? item.name : undefined}
               >
-                <Icon className={cn("w-5 h-5 flex-shrink-0", isActive ? "text-white" : "text-text-muted group-hover:text-white")} />
+                <Icon className={cn("w-5 h-5 flex-shrink-0", isActive ? "text-text" : "text-text-muted group-hover:text-text")} />
                 <AnimatePresence mode="popLayout">
                   {!isCollapsed && (
                     <motion.span
@@ -122,11 +122,11 @@ export default function DashboardLayout({ children }) {
           })}
 
           <div className="mt-8 pt-4 border-t border-border/50 px-2 space-y-1">
-            <Link to="/profile" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-white hover:bg-surface-hover transition-colors">
+            <Link to="/profile" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-text hover:bg-surface-hover transition-colors">
               <User className="w-5 h-5 flex-shrink-0" />
               {!isCollapsed && <span className="text-sm font-medium whitespace-nowrap">Profile</span>}
             </Link>
-            <Link to="/settings" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-white hover:bg-surface-hover transition-colors">
+            <Link to="/settings" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-text hover:bg-surface-hover transition-colors">
               <Settings className="w-5 h-5 flex-shrink-0" />
               {!isCollapsed && <span className="text-sm font-medium whitespace-nowrap">Settings</span>}
             </Link>
@@ -139,7 +139,7 @@ export default function DashboardLayout({ children }) {
             <AnimatePresence mode="popLayout">
               {!isCollapsed && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col whitespace-nowrap">
-                  <span className="text-sm font-bold text-white">Senior Dev</span>
+                  <span className="text-sm font-bold text-text">Senior Dev</span>
                   <span className="text-xs text-text-muted">Level 42</span>
                 </motion.div>
               )}
@@ -172,7 +172,7 @@ export default function DashboardLayout({ children }) {
               className="lg:hidden fixed top-0 left-0 bottom-0 w-72 bg-surface border-r border-border z-50 flex flex-col"
             >
               <div className="h-16 flex items-center px-6 border-b border-border/50">
-                <Terminal className="w-6 h-6 text-white mr-2" />
+                <Terminal className="w-6 h-6 text-text mr-2" />
                 <span className="font-bold text-xl tracking-tight">KhudSeKrle</span>
               </div>
               
@@ -187,7 +187,7 @@ export default function DashboardLayout({ children }) {
                       onClick={() => setMobileOpen(false)}
                       className={cn(
                         "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
-                        isActive ? "bg-primary-base/10 text-white font-semibold" : "text-text-muted hover:text-white hover:bg-surface-hover font-medium"
+                        isActive ? "bg-primary-soft text-primary-base font-semibold" : "text-text-muted hover:text-text hover:bg-surface-hover font-medium"
                       )}
                     >
                       <Icon className="w-5 h-5" />
@@ -201,12 +201,12 @@ export default function DashboardLayout({ children }) {
                 <div className="flex items-center gap-3 mb-6">
                   <Avatar fallback="SD" className="w-10 h-10 border-border bg-surface-hover" />
                   <div className="flex flex-col">
-                    <span className="text-sm font-bold text-white">Senior Dev</span>
+                    <span className="text-sm font-bold text-text">Senior Dev</span>
                     <span className="text-xs text-text-muted">Level 42</span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center text-sm font-medium text-text-muted">
-                  <Link to="/settings" onClick={() => setMobileOpen(false)} className="hover:text-white transition-colors">Settings</Link>
+                  <Link to="/settings" onClick={() => setMobileOpen(false)} className="hover:text-text transition-colors">Settings</Link>
                   <button className="text-error-base hover:text-error-soft transition-colors flex items-center gap-1">
                     <LogOut className="w-4 h-4" /> Sign Out
                   </button>

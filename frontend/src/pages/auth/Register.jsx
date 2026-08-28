@@ -44,12 +44,12 @@ export default function Register() {
     <div className="min-h-screen bg-[var(--background)] text-[var(--text)] flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
       
       <div className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
-        <div className="w-[600px] h-[600px] bg-primary-violet/5 rounded-full blur-[100px] mix-blend-screen" />
+        <div className="w-[600px] h-[600px] bg-primary-base/5 rounded-full blur-[100px] mix-blend-screen" />
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 flex flex-col items-center mb-8">
         <Link to="/" className="flex items-center gap-2 mb-6">
-          <Terminal className="w-8 h-8 text-white" />
+          <Terminal className="w-8 h-8 text-text" />
           <span className="font-bold text-2xl tracking-tight">KhudSeKrle</span>
         </Link>
       </div>
@@ -130,7 +130,7 @@ export default function Register() {
           <CardFooter className="flex justify-center border-t border-border/50 pt-6">
             <p className="text-sm text-text-muted">
               Already have an account?{' '}
-              <Link to="/auth/login" className="font-medium text-white hover:text-primary-electric transition-colors">
+              <Link to="/auth/login" className="font-medium text-text hover:text-primary-electric transition-colors">
                 Sign in
               </Link>
             </p>

@@ -18,8 +18,8 @@ export default function AIAssistant({ analysisState, analysisData, onAnalyze }) 
       
       <div className="h-12 flex items-center justify-between px-4 border-b border-border bg-surface">
         <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-white" />
-          <span className="text-sm font-bold text-white">AI Assistant</span>
+          <Sparkles className="w-4 h-4 text-text" />
+          <span className="text-sm font-bold text-text">AI Assistant</span>
         </div>
         {analysisState === 'success' && <Badge variant="outline" className="text-xs">Resolved</Badge>}
       </div>
@@ -30,9 +30,9 @@ export default function AIAssistant({ analysisState, analysisData, onAnalyze }) 
         {analysisState === 'idle' && (
           <div className="flex flex-col items-center text-center mt-12 px-6">
             <div className="w-16 h-16 rounded-full bg-surface-hover border border-border flex items-center justify-center mb-6">
-              <Bot className="w-8 h-8 text-white" />
+              <Bot className="w-8 h-8 text-text" />
             </div>
-            <h3 className="text-lg font-bold text-white mb-2">Ready to debug</h3>
+            <h3 className="text-lg font-bold text-text mb-2">Ready to debug</h3>
             <p className="text-sm text-text-muted mb-6">
               Paste your broken code and hit analyze. I'll identify the root cause, explain it to you, and suggest a fix.
             </p>
@@ -51,9 +51,9 @@ export default function AIAssistant({ analysisState, analysisData, onAnalyze }) 
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               className="w-16 h-16 rounded-full border-2 border-primary-cyan border-t-transparent flex items-center justify-center mb-6"
             >
-              <Sparkles className="w-6 h-6 text-white absolute" />
+              <Sparkles className="w-6 h-6 text-text absolute" />
             </motion.div>
-            <h3 className="text-lg font-bold text-white mb-2 animate-pulse">Analyzing logic...</h3>
+            <h3 className="text-lg font-bold text-text mb-2 animate-pulse">Analyzing logic...</h3>
             <p className="text-sm text-text-muted">Scanning for syntax errors, memory leaks, and anti-patterns.</p>
           </div>
         )}
@@ -72,7 +72,7 @@ export default function AIAssistant({ analysisState, analysisData, onAnalyze }) 
                 <div className="flex items-start gap-3">
                   <AlertTriangle className={`w-5 h-5 mt-0.5 flex-shrink-0 ${analysisData.severity === 'high' ? 'text-error-base' : 'text-warning-base'}`} />
                   <div>
-                    <h4 className="font-bold text-white text-sm mb-1">{analysisData.summary}</h4>
+                    <h4 className="font-bold text-text text-sm mb-1">{analysisData.summary}</h4>
                     <p className="text-xs text-text-muted">Lines {analysisData.affectedLines.join(', ')}</p>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ export default function AIAssistant({ analysisState, analysisData, onAnalyze }) 
                 <h4 className="text-xs font-bold uppercase tracking-wider text-text-muted mb-3 flex items-center gap-2">
                   <Info className="w-4 h-4" /> Root Cause
                 </h4>
-                <div className="p-4 rounded-lg bg-background border border-border text-sm text-white/90 leading-relaxed">
+                <div className="p-4 rounded-lg bg-background border border-border text-sm text-text leading-relaxed">
                   {analysisData.rootCause}
                 </div>
               </div>
@@ -104,7 +104,7 @@ export default function AIAssistant({ analysisState, analysisData, onAnalyze }) 
                   Preview Suggested Fix
                 </Button>
                 <div className="flex items-center justify-between text-xs text-text-muted">
-                  <span>Press <kbd className="bg-surface-strong px-1.5 py-0.5 rounded border border-border text-white">Alt</kbd> + <kbd className="bg-surface-strong px-1.5 py-0.5 rounded border border-border text-white">A</kbd> to apply directly</span>
+                  <span>Press <kbd className="bg-surface-strong px-1.5 py-0.5 rounded border border-border text-text">Alt</kbd> + <kbd className="bg-surface-strong px-1.5 py-0.5 rounded border border-border text-text">A</kbd> to apply directly</span>
                 </div>
               </div>
 

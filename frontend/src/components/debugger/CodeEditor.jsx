@@ -3,30 +3,30 @@ import Editor, { useMonaco } from '@monaco-editor/react';
 import { Loader2 } from 'lucide-react';
 
 const khudsekrleTheme = {
-  base: 'vs-dark',
+  base: 'vs',
   inherit: true,
   rules: [
-    { background: '050505' },
-    { token: 'comment', foreground: '737373', fontStyle: 'italic' },
-    { token: 'keyword', foreground: 'F5F5F5', fontStyle: 'bold' },
-    { token: 'identifier', foreground: 'D4D4D4' },
-    { token: 'string', foreground: 'A1A1A1' },
-    { token: 'number', foreground: 'A1A1A1' },
-    { token: 'type', foreground: 'FFFFFF' },
-    { token: 'class', foreground: 'FFFFFF' }
+    { background: 'FFFFFF' },
+    { token: 'comment', foreground: '64748B', fontStyle: 'italic' },
+    { token: 'keyword', foreground: '2563EB', fontStyle: 'bold' },
+    { token: 'identifier', foreground: '1E293B' },
+    { token: 'string', foreground: '10B981' },
+    { token: 'number', foreground: 'F59E0B' },
+    { token: 'type', foreground: '0EA5E9' },
+    { token: 'class', foreground: '0EA5E9' }
   ],
   colors: {
-    'editor.background': '#0a0a0a',
-    'editor.foreground': '#D4D4D4',
-    'editorLineNumber.foreground': '#404040',
-    'editorLineNumber.activeForeground': '#A1A1A1',
-    'editor.lineHighlightBackground': '#171717',
-    'editor.selectionBackground': '#ffffff20',
-    'editorCursor.foreground': '#FFFFFF',
-    'editorIndentGuide.background': '#171717',
-    'editorIndentGuide.activeBackground': '#404040',
-    'editorError.foreground': '#ef4444',
-    'editorWarning.foreground': '#f59e0b'
+    'editor.background': '#FFFFFF',
+    'editor.foreground': '#1E293B',
+    'editorLineNumber.foreground': '#94A3B8',
+    'editorLineNumber.activeForeground': '#2563EB',
+    'editor.lineHighlightBackground': '#F1F5F9',
+    'editor.selectionBackground': '#BFDBFE',
+    'editorCursor.foreground': '#2563EB',
+    'editorIndentGuide.background': '#F1F5F9',
+    'editorIndentGuide.activeBackground': '#E2E8F0',
+    'editorError.foreground': '#EF4444',
+    'editorWarning.foreground': '#F59E0B'
   }
 };
 
@@ -52,7 +52,7 @@ export default function CodeEditor({ file, onChange, onAnalyze }) {
 
   const LoadingFallback = () => (
     <div className="flex flex-col items-center justify-center h-full bg-surface">
-      <Loader2 className="w-8 h-8 text-white animate-spin mb-4" />
+      <Loader2 className="w-8 h-8 text-text animate-spin mb-4" />
       <p className="text-sm text-text-muted">Loading Code Engine...</p>
     </div>
   );

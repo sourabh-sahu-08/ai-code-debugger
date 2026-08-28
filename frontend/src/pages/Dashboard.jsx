@@ -12,7 +12,7 @@ export default function Dashboard() {
       {/* Welcome Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-1 text-white">Good evening, Developer 👋</h1>
+          <h1 className="text-3xl font-bold tracking-tight mb-1 text-text">Good evening, Developer 👋</h1>
           <p className="text-text-muted">Ready to squash some bugs and level up?</p>
         </div>
         <Link to="/debugger">
@@ -28,9 +28,9 @@ export default function Dashboard() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-text-muted">Bugs Fixed</span>
-              <Bug className="w-5 h-5 text-white" />
+              <Bug className="w-5 h-5 text-text" />
             </div>
-            <div className="text-3xl font-bold text-white mb-1">1,248</div>
+            <div className="text-3xl font-bold text-text mb-1">1,248</div>
             <p className="text-xs text-success-base flex items-center gap-1">
               <Activity className="w-3 h-3" /> +12 this week
             </p>
@@ -43,7 +43,7 @@ export default function Dashboard() {
               <span className="text-sm font-medium text-text-muted">Debug Streak</span>
               <Flame className="w-5 h-5 text-orange-500" />
             </div>
-            <div className="text-3xl font-bold text-white mb-1">14 Days</div>
+            <div className="text-3xl font-bold text-text mb-1">14 Days</div>
             <p className="text-xs text-text-muted">Keep it up to hit level 43!</p>
           </CardContent>
         </Card>
@@ -54,7 +54,7 @@ export default function Dashboard() {
               <span className="text-sm font-medium text-text-muted">Resolution Rate</span>
               <Target className="w-5 h-5 text-success-base" />
             </div>
-            <div className="text-3xl font-bold text-white mb-1">94%</div>
+            <div className="text-3xl font-bold text-text mb-1">94%</div>
             <p className="text-xs text-success-base">Top 10% of users</p>
           </CardContent>
         </Card>
@@ -65,7 +65,7 @@ export default function Dashboard() {
               <span className="text-sm font-medium text-text-muted">Total XP</span>
               <Zap className="w-5 h-5 text-text-muted" />
             </div>
-            <div className="text-3xl font-bold text-white mb-1">42,500</div>
+            <div className="text-3xl font-bold text-text mb-1">42,500</div>
             <div className="w-full bg-surface-strong h-1.5 rounded-full mt-2 overflow-hidden">
               <div className="bg-primary-violet h-full w-[70%]" />
             </div>
@@ -83,11 +83,11 @@ export default function Dashboard() {
           <Card hoverEffect className="relative overflow-hidden bg-gradient-to-br from-primary-base/10 to-surface border-primary-base/20">
             {/* Neural SVG Decoration */}
             <svg className="absolute right-0 top-0 w-64 h-full opacity-20 pointer-events-none" viewBox="0 0 200 100">
-              <path d="M50,50 L100,20 L150,50 L100,80 Z" fill="none" stroke="currentColor" className="text-white" strokeWidth="1" />
-              <circle cx="50" cy="50" r="4" fill="currentColor" className="text-white animate-pulse" />
-              <circle cx="100" cy="20" r="4" fill="currentColor" className="text-white animate-pulse" style={{ animationDelay: '0.2s' }} />
-              <circle cx="150" cy="50" r="4" fill="currentColor" className="text-white animate-pulse" style={{ animationDelay: '0.4s' }} />
-              <circle cx="100" cy="80" r="4" fill="currentColor" className="text-white animate-pulse" style={{ animationDelay: '0.6s' }} />
+              <path d="M50,50 L100,20 L150,50 L100,80 Z" fill="none" stroke="currentColor" className="text-text" strokeWidth="1" />
+              <circle cx="50" cy="50" r="4" fill="currentColor" className="text-text animate-pulse" />
+              <circle cx="100" cy="20" r="4" fill="currentColor" className="text-text animate-pulse" style={{ animationDelay: '0.2s' }} />
+              <circle cx="150" cy="50" r="4" fill="currentColor" className="text-text animate-pulse" style={{ animationDelay: '0.4s' }} />
+              <circle cx="100" cy="80" r="4" fill="currentColor" className="text-text animate-pulse" style={{ animationDelay: '0.6s' }} />
               <path d="M100,20 L100,80 M50,50 L150,50" fill="none" stroke="currentColor" className="text-text-muted opacity-50" strokeWidth="0.5" />
             </svg>
             
@@ -97,10 +97,10 @@ export default function Dashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent className="relative z-10">
-              <p className="text-white/90">
+              <p className="text-text/90">
                 "You frequently encounter asynchronous JavaScript errors inside `useEffect` hooks. I recommend reviewing React's documentation on data fetching and cleanup functions to avoid memory leaks and stale closures."
               </p>
-              <Button variant="ghost" size="sm" className="mt-4 text-white px-0">
+              <Button variant="ghost" size="sm" className="mt-4 text-text px-0">
                 View recommended learning module &rarr;
               </Button>
             </CardContent>
@@ -122,14 +122,14 @@ export default function Dashboard() {
                   { lang: 'Python', error: 'IndentationError: unexpected indent', status: 'Resolved', time: 'Yesterday', icon: Terminal },
                   { lang: 'Node.js', error: 'UnhandledPromiseRejectionWarning', status: 'Open', time: '2 days ago', icon: Bug }
                 ].map((session, i) => (
-                  <div key={i} className="flex items-center justify-between p-4 rounded-lg bg-surface/50 border border-border hover:border-white/10 transition-colors cursor-pointer">
+                  <div key={i} className="flex items-center justify-between p-4 rounded-lg bg-surface/50 border border-border hover:border-border transition-colors cursor-pointer">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-md bg-surface-strong flex items-center justify-center">
                         <session.icon className="w-5 h-5 text-text-muted" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="font-semibold text-sm text-white">{session.lang}</span>
+                          <span className="font-semibold text-sm text-text">{session.lang}</span>
                           <Badge variant={session.status === 'Resolved' ? 'success' : 'secondary'} size="sm" className="text-[10px]">
                             {session.status}
                           </Badge>
@@ -153,7 +153,7 @@ export default function Dashboard() {
             <CardHeader>
               <div className="flex items-center gap-2 mb-2">
                 <Trophy className="w-5 h-5 text-yellow-500" />
-                <CardTitle className="text-lg text-white">Daily Challenge</CardTitle>
+                <CardTitle className="text-lg text-text">Daily Challenge</CardTitle>
               </div>
               <CardDescription>Test your skills and earn XP</CardDescription>
             </CardHeader>
@@ -161,9 +161,9 @@ export default function Dashboard() {
               <div className="p-4 rounded-lg bg-surface border border-border">
                 <div className="flex items-center justify-between mb-2">
                   <Badge variant="secondary" className="text-yellow-500 bg-yellow-500/10 border-none">Hard</Badge>
-                  <span className="text-xs font-bold text-white">+500 XP</span>
+                  <span className="text-xs font-bold text-text">+500 XP</span>
                 </div>
-                <h4 className="font-bold text-white mb-2 text-sm">Memory Leak in React</h4>
+                <h4 className="font-bold text-text mb-2 text-sm">Memory Leak in React</h4>
                 <p className="text-xs text-text-muted mb-4 leading-relaxed">
                   Fix the memory leak caused by an unmounted component still receiving socket events.
                 </p>

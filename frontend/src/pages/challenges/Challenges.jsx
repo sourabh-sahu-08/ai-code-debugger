@@ -8,7 +8,7 @@ export default function Challenges() {
   return (
     <div className="max-w-5xl mx-auto w-full p-6 lg:p-10 space-y-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
+        <h1 className="text-3xl font-bold tracking-tight text-text flex items-center gap-2">
           <Trophy className="w-8 h-8 text-yellow-500" />
           Daily Challenges
         </h1>
@@ -28,11 +28,11 @@ export default function Challenges() {
                   <Badge variant={c.diff === 'Hard' ? 'danger' : c.diff === 'Medium' ? 'warning' : 'secondary'}>
                     {c.diff}
                   </Badge>
-                  <span className="text-sm font-bold text-white flex items-center gap-1">
+                  <span className="text-sm font-bold text-text flex items-center gap-1">
                     <Zap className="w-4 h-4" /> {c.xp} XP
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">{c.title}</h3>
+                <h3 className="text-xl font-bold text-text mb-2">{c.title}</h3>
                 <div className="flex items-center gap-4 text-sm text-text-muted">
                   <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> {c.time}</span>
                 </div>

@@ -23,7 +23,7 @@ export default function Friends() {
       
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
+          <h1 className="text-3xl font-bold tracking-tight text-text flex items-center gap-2">
             <Users className="w-8 h-8 text-text-muted" />
             Friends & Peers
           </h1>
@@ -56,7 +56,7 @@ export default function Friends() {
                     )}
                   </div>
                   <div>
-                    <h3 className="font-bold text-white leading-tight">{friend.name}</h3>
+                    <h3 className="font-bold text-text leading-tight">{friend.name}</h3>
                     <span className="text-xs text-text-muted">@{friend.username}</span>
                   </div>
                 </div>
@@ -64,17 +64,17 @@ export default function Friends() {
               
               <div className="grid grid-cols-2 gap-4 mt-6">
                 <div className="flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-white" />
+                  <Shield className="w-4 h-4 text-text" />
                   <div className="flex flex-col">
                     <span className="text-[10px] text-text-muted uppercase tracking-wider font-bold">Level</span>
-                    <span className="text-sm font-bold text-white">{friend.level}</span>
+                    <span className="text-sm font-bold text-text">{friend.level}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <Flame className="w-4 h-4 text-orange-500" />
                   <div className="flex flex-col">
                     <span className="text-[10px] text-text-muted uppercase tracking-wider font-bold">Streak</span>
-                    <span className="text-sm font-bold text-white">{friend.streak} days</span>
+                    <span className="text-sm font-bold text-text">{friend.streak} days</span>
                   </div>
                 </div>
               </div>

@@ -42,13 +42,11 @@ export const Card = React.forwardRef(({ className, children, hoverEffect = false
       style={styleProp}
       className={cn(
         'rounded-xl border border-border bg-surface text-text shadow-sm relative overflow-hidden',
-        hoverEffect && 'transition-shadow hover:shadow-xl hover:shadow-white/5 hover:border-border/80',
+        hoverEffect && 'transition-all duration-300 hover:shadow-lg hover:border-primary-base/20 hover:-translate-y-1',
         className
       )}
       {...props}
     >
-      {/* Subtle top glare effect */}
-      {hoverEffect && <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent z-10" />}
       {children}
     </Component>
   );

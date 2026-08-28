@@ -17,10 +17,10 @@ export default function FileExplorer({ files, activeFile, onSelectFile }) {
           <FolderOpen className="w-4 h-4" /> Workspace
         </span>
         <div className="flex items-center gap-1">
-          <button className="p-1 hover:bg-surface-hover rounded text-text-muted hover:text-white transition-colors" title="New File">
+          <button className="p-1 hover:bg-surface-hover rounded text-text-muted hover:text-text transition-colors" title="New File">
             <Plus className="w-4 h-4" />
           </button>
-          <button className="p-1 hover:bg-surface-hover rounded text-text-muted hover:text-white transition-colors" title="Upload File">
+          <button className="p-1 hover:bg-surface-hover rounded text-text-muted hover:text-text transition-colors" title="Upload File">
             <Upload className="w-4 h-4" />
           </button>
         </div>
@@ -31,14 +31,14 @@ export default function FileExplorer({ files, activeFile, onSelectFile }) {
           <div 
             key={file.id}
             onClick={() => onSelectFile(file.id)}
-            className={`flex items-center justify-between px-2 py-1.5 rounded text-sm cursor-pointer group transition-colors ${activeFile === file.id ? 'bg-white/10 text-white font-medium' : 'text-text-muted hover:bg-surface hover:text-white'}`}
+            className={`flex items-center justify-between px-2 py-1.5 rounded text-sm cursor-pointer group transition-colors ${activeFile === file.id ? 'bg-white/10 text-text font-medium' : 'text-text-muted hover:bg-surface hover:text-text'}`}
           >
             <div className="flex items-center gap-2 overflow-hidden">
               {getFileIcon(file.name)}
               <span className="truncate">{file.name}</span>
             </div>
             {activeFile === file.id && (
-              <button className="p-0.5 text-text-muted hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
+              <button className="p-0.5 text-text-muted hover:text-text opacity-0 group-hover:opacity-100 transition-opacity">
                 <MoreVertical className="w-3.5 h-3.5" />
               </button>
             )}

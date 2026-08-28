@@ -34,8 +34,8 @@ export default function Projects() {
       
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-            <FolderGit2 className="w-8 h-8 text-white" />
+          <h1 className="text-3xl font-bold tracking-tight text-text flex items-center gap-2">
+            <FolderGit2 className="w-8 h-8 text-text" />
             My Projects
           </h1>
           <p className="text-text-muted mt-1">Manage your workspaces and collaborative debugging sessions.</p>
@@ -55,7 +55,7 @@ export default function Projects() {
         <Card className="bg-surface/30 border-dashed border-border text-center py-16">
           <CardContent>
             <FolderGit2 className="w-12 h-12 text-text-muted mx-auto mb-4 opacity-50" />
-            <h3 className="text-lg font-bold text-white mb-2">No projects yet</h3>
+            <h3 className="text-lg font-bold text-text mb-2">No projects yet</h3>
             <p className="text-sm text-text-muted mb-6">Create your first project to organize your code and collaborate.</p>
             <Button leftIcon={<Plus className="w-4 h-4" />} variant="secondary">Create Project</Button>
           </CardContent>
@@ -66,7 +66,7 @@ export default function Projects() {
             <Card key={project._id} className="bg-surface/50 border-border/50 hover:border-white\/10 transition-colors group cursor-pointer">
               <CardHeader className="pb-3">
                 <div className="flex justify-between items-start mb-2">
-                  <CardTitle className="text-lg group-hover:text-white transition-colors">{project.name}</CardTitle>
+                  <CardTitle className="text-lg group-hover:text-text transition-colors">{project.name}</CardTitle>
                 </div>
                 <CardDescription className="line-clamp-2 min-h-[40px]">
                   {project.description || 'No description provided.'}

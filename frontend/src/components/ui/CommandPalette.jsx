@@ -87,7 +87,7 @@ export function CommandPalette() {
             <Search className="w-5 h-5 text-text-muted mr-3" />
             <input
               autoFocus
-              className="w-full bg-transparent h-14 text-white focus:outline-none placeholder:text-text-muted font-medium"
+              className="w-full bg-transparent h-14 text-text focus:outline-none placeholder:text-text-muted font-medium"
               placeholder="Type a command or search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -108,7 +108,7 @@ export function CommandPalette() {
                   <button
                     key={cmd.id}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
-                      isSelected ? 'bg-white\/5 text-white' : 'text-text-muted hover:bg-surface-hover hover:text-white'
+                      isSelected ? 'bg-white\/5 text-text' : 'text-text-muted hover:bg-surface-hover hover:text-text'
                     }`}
                     onClick={() => {
                       navigate(cmd.path);

@@ -33,8 +33,8 @@ export default function DebugHistory() {
     <div className="max-w-5xl mx-auto w-full p-6 lg:p-10 space-y-8">
       
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-          <History className="w-8 h-8 text-white" />
+        <h1 className="text-3xl font-bold tracking-tight text-text flex items-center gap-2">
+          <History className="w-8 h-8 text-text" />
           Debug History
         </h1>
         <p className="text-text-muted mt-1">Review your past debugging sessions and AI analyses.</p>
@@ -50,7 +50,7 @@ export default function DebugHistory() {
         <Card className="bg-surface/30 border-dashed border-border text-center py-16">
           <CardContent>
             <Bug className="w-12 h-12 text-text-muted mx-auto mb-4 opacity-50" />
-            <h3 className="text-lg font-bold text-white mb-2">No debug history</h3>
+            <h3 className="text-lg font-bold text-text mb-2">No debug history</h3>
             <p className="text-sm text-text-muted">You haven't run any AI analysis yet.</p>
           </CardContent>
         </Card>
@@ -72,7 +72,7 @@ export default function DebugHistory() {
                         </span>
                       )}
                     </div>
-                    <h4 className="font-bold text-white text-base mb-1">
+                    <h4 className="font-bold text-text text-base mb-1">
                       {session.aiResponse?.summary || 'Code Analysis'}
                     </h4>
                     <div className="flex items-center gap-4 text-xs text-text-muted">

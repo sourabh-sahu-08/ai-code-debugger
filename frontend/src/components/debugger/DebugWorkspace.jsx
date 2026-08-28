@@ -86,10 +86,10 @@ export default function DebugWorkspace() {
   // Dynamic glow color based on analysis state
   const getGlowColor = () => {
     switch (analysisState) {
-      case 'analyzing': return 'shadow-[0_0_40px_-10px_rgba(255,255,255,0.15)] border-white/20';
-      case 'error': return 'shadow-[0_0_40px_-10px_rgba(220,38,38,0.2)] border-error-base/30';
-      case 'success': return 'shadow-[0_0_40px_-10px_rgba(255,255,255,0.1)] border-white/10';
-      default: return 'shadow-none border-border/30';
+      case 'analyzing': return 'shadow-[0_0_30px_-5px_rgba(37,99,235,0.2)] border-primary-base/20';
+      case 'error': return 'shadow-[0_0_30px_-5px_rgba(239,68,68,0.2)] border-error-base/20';
+      case 'success': return 'shadow-[0_0_30px_-5px_rgba(16,185,129,0.2)] border-success-base/20';
+      default: return 'shadow-sm border-border';
     }
   };
 
@@ -123,7 +123,7 @@ export default function DebugWorkspace() {
             <button
               key={file.id}
               onClick={() => setActiveFileId(file.id)}
-              className={`px-5 h-[80%] rounded-md flex items-center text-sm min-w-[120px] transition-all duration-300 font-medium ${activeFileId === file.id ? 'bg-background shadow-md text-white border border-white/20' : 'text-text-muted hover:bg-surface-hover hover:text-white border border-transparent'}`}
+              className={`px-5 h-[80%] rounded-md flex items-center text-sm min-w-[120px] transition-all duration-300 font-medium ${activeFileId === file.id ? 'bg-background shadow-md text-text border border-white/20' : 'text-text-muted hover:bg-surface-hover hover:text-text border border-transparent'}`}
             >
               {file.name}
             </button>

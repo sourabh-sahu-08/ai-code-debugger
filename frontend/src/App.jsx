@@ -44,9 +44,9 @@ function App() {
       <Route path="/achievements" element={<DashboardLayout><Achievements /></DashboardLayout>} />
       
       <Route path="/friends" element={<DashboardLayout><Friends /></DashboardLayout>} />
-      <Route path="/community" element={<DashboardLayout><div className="p-8 text-white">Community Coming Soon</div></DashboardLayout>} />
-      <Route path="/profile" element={<DashboardLayout><div className="p-8 text-white">Profile Coming Soon</div></DashboardLayout>} />
-      <Route path="/settings" element={<DashboardLayout><div className="p-8 text-white">Settings Coming Soon</div></DashboardLayout>} />
+      <Route path="/community" element={<DashboardLayout><div className="p-8 text-text">Community Coming Soon</div></DashboardLayout>} />
+      <Route path="/profile" element={<DashboardLayout><div className="p-8 text-text">Profile Coming Soon</div></DashboardLayout>} />
+      <Route path="/settings" element={<DashboardLayout><div className="p-8 text-text">Settings Coming Soon</div></DashboardLayout>} />
     </Routes>
   );
 }
