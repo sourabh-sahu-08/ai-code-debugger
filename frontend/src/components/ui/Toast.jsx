@@ -43,7 +43,7 @@ export function ToastProvider({ children }) {
 
 function ToastItem({ toast, onRemove }) {
   const icons = {
-    default: <Info className="h-5 w-5 text-primary-violet" />,
+    default: <Info className="h-5 w-5 text-text-muted" />,
     success: <CheckCircle2 className="h-5 w-5 text-success-base" />,
     error: <AlertCircle className="h-5 w-5 text-error-base" />,
   };

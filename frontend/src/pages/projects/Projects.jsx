@@ -35,7 +35,7 @@ export default function Projects() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-            <FolderGit2 className="w-8 h-8 text-primary-cyan" />
+            <FolderGit2 className="w-8 h-8 text-white" />
             My Projects
           </h1>
           <p className="text-text-muted mt-1">Manage your workspaces and collaborative debugging sessions.</p>
@@ -63,10 +63,10 @@ export default function Projects() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map(project => (
-            <Card key={project._id} className="bg-surface/50 border-border/50 hover:border-primary-cyan/30 transition-colors group cursor-pointer">
+            <Card key={project._id} className="bg-surface/50 border-border/50 hover:border-white\/10 transition-colors group cursor-pointer">
               <CardHeader className="pb-3">
                 <div className="flex justify-between items-start mb-2">
-                  <CardTitle className="text-lg group-hover:text-primary-cyan transition-colors">{project.name}</CardTitle>
+                  <CardTitle className="text-lg group-hover:text-white transition-colors">{project.name}</CardTitle>
                 </div>
                 <CardDescription className="line-clamp-2 min-h-[40px]">
                   {project.description || 'No description provided.'}

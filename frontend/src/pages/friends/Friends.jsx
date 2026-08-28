@@ -24,7 +24,7 @@ export default function Friends() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-            <Users className="w-8 h-8 text-primary-violet" />
+            <Users className="w-8 h-8 text-text-muted" />
             Friends & Peers
           </h1>
           <p className="text-text-muted mt-1">Connect with developers, share debugging sessions, and learn together.</p>
@@ -45,7 +45,7 @@ export default function Friends() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {friends.map(friend => (
-          <Card key={friend._id} className="bg-surface/50 border-border/50 hover:border-primary-violet/30 transition-colors">
+          <Card key={friend._id} className="bg-surface/50 border-border/50 hover:border-white\/10 transition-colors">
             <CardContent className="p-6">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4">
@@ -64,7 +64,7 @@ export default function Friends() {
               
               <div className="grid grid-cols-2 gap-4 mt-6">
                 <div className="flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-primary-cyan" />
+                  <Shield className="w-4 h-4 text-white" />
                   <div className="flex flex-col">
                     <span className="text-[10px] text-text-muted uppercase tracking-wider font-bold">Level</span>
                     <span className="text-sm font-bold text-white">{friend.level}</span>

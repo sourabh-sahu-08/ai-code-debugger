@@ -31,7 +31,7 @@ export default function FileExplorer({ files, activeFile, onSelectFile }) {
           <div 
             key={file.id}
             onClick={() => onSelectFile(file.id)}
-            className={`flex items-center justify-between px-2 py-1.5 rounded text-sm cursor-pointer group transition-colors ${activeFile === file.id ? 'bg-primary-base/20 text-primary-cyan font-medium' : 'text-text-muted hover:bg-surface hover:text-white'}`}
+            className={`flex items-center justify-between px-2 py-1.5 rounded text-sm cursor-pointer group transition-colors ${activeFile === file.id ? 'bg-white/10 text-white font-medium' : 'text-text-muted hover:bg-surface hover:text-white'}`}
           >
             <div className="flex items-center gap-2 overflow-hidden">
               {getFileIcon(file.name)}

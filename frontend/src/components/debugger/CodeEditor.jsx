@@ -6,25 +6,25 @@ const khudsekrleTheme = {
   base: 'vs-dark',
   inherit: true,
   rules: [
-    { background: '121214' },
-    { token: 'comment', foreground: '64748b', fontStyle: 'italic' },
-    { token: 'keyword', foreground: '8b5cf6' },
-    { token: 'identifier', foreground: 'f8fafc' },
-    { token: 'string', foreground: '10b981' },
-    { token: 'number', foreground: 'f59e0b' },
-    { token: 'type', foreground: '06b6d4' },
-    { token: 'class', foreground: '06b6d4' }
+    { background: '050505' },
+    { token: 'comment', foreground: '737373', fontStyle: 'italic' },
+    { token: 'keyword', foreground: 'F5F5F5', fontStyle: 'bold' },
+    { token: 'identifier', foreground: 'D4D4D4' },
+    { token: 'string', foreground: 'A1A1A1' },
+    { token: 'number', foreground: 'A1A1A1' },
+    { token: 'type', foreground: 'FFFFFF' },
+    { token: 'class', foreground: 'FFFFFF' }
   ],
   colors: {
-    'editor.background': '#121214',
-    'editor.foreground': '#f8fafc',
-    'editorLineNumber.foreground': '#27272a',
-    'editorLineNumber.activeForeground': '#64748b',
-    'editor.lineHighlightBackground': '#18181b',
-    'editor.selectionBackground': '#2563eb40',
-    'editorCursor.foreground': '#06b6d4',
-    'editorIndentGuide.background': '#1e1e24',
-    'editorIndentGuide.activeBackground': '#27272a',
+    'editor.background': '#0a0a0a',
+    'editor.foreground': '#D4D4D4',
+    'editorLineNumber.foreground': '#404040',
+    'editorLineNumber.activeForeground': '#A1A1A1',
+    'editor.lineHighlightBackground': '#171717',
+    'editor.selectionBackground': '#ffffff20',
+    'editorCursor.foreground': '#FFFFFF',
+    'editorIndentGuide.background': '#171717',
+    'editorIndentGuide.activeBackground': '#404040',
     'editorError.foreground': '#ef4444',
     'editorWarning.foreground': '#f59e0b'
   }
@@ -52,7 +52,7 @@ export default function CodeEditor({ file, onChange, onAnalyze }) {
 
   const LoadingFallback = () => (
     <div className="flex flex-col items-center justify-center h-full bg-surface">
-      <Loader2 className="w-8 h-8 text-primary-cyan animate-spin mb-4" />
+      <Loader2 className="w-8 h-8 text-white animate-spin mb-4" />
       <p className="text-sm text-text-muted">Loading Code Engine...</p>
     </div>
   );

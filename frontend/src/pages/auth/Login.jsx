@@ -49,7 +49,7 @@ export default function Login() {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 flex flex-col items-center mb-8">
         <Link to="/" className="flex items-center gap-2 mb-6">
-          <Terminal className="w-8 h-8 text-primary-cyan" />
+          <Terminal className="w-8 h-8 text-white" />
           <span className="font-bold text-2xl tracking-tight">KhudSeKrle</span>
         </Link>
       </div>
@@ -90,7 +90,7 @@ export default function Login() {
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
                   <label htmlFor="password" className="block text-sm font-medium text-text-muted">Password</label>
-                  <Link to="/auth/forgot-password" className="text-xs font-medium text-primary-cyan hover:text-primary-electric transition-colors">
+                  <Link to="/auth/forgot-password" className="text-xs font-medium text-white hover:text-primary-electric transition-colors">
                     Forgot password?
                   </Link>
                 </div>
@@ -114,7 +114,7 @@ export default function Login() {
           <CardFooter className="flex justify-center border-t border-border/50 pt-6">
             <p className="text-sm text-text-muted">
               Don't have an account?{' '}
-              <Link to="/auth/register" className="font-medium text-primary-cyan hover:text-primary-electric transition-colors">
+              <Link to="/auth/register" className="font-medium text-white hover:text-primary-electric transition-colors">
                 Sign up now
               </Link>
             </p>

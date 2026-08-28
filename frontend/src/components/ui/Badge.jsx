@@ -7,7 +7,7 @@ export function Badge({
   ...props
 }) {
   const variants = {
-    default: 'border-transparent bg-primary-violet text-white',
+    default: 'border-transparent bg-white text-black',
     secondary: 'border-transparent bg-surface-hover text-text',
     outline: 'text-text',
     success: 'border-transparent bg-success-base/20 text-success-base',
@@ -17,7 +17,7 @@ export function Badge({
   return (
     <div
       className={cn(
-        'inline-flex items-center rounded-full border border-border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary-violet',
+        'inline-flex items-center rounded-full border border-border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-white',
         variants[variant],
         className
       )}

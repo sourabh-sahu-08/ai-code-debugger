@@ -18,7 +18,7 @@ export default function AIAssistant({ analysisState, analysisData, onAnalyze }) 
       
       <div className="h-12 flex items-center justify-between px-4 border-b border-border bg-surface">
         <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-primary-cyan" />
+          <Sparkles className="w-4 h-4 text-white" />
           <span className="text-sm font-bold text-white">AI Assistant</span>
         </div>
         {analysisState === 'success' && <Badge variant="outline" className="text-xs">Resolved</Badge>}
@@ -30,7 +30,7 @@ export default function AIAssistant({ analysisState, analysisData, onAnalyze }) 
         {analysisState === 'idle' && (
           <div className="flex flex-col items-center text-center mt-12 px-6">
             <div className="w-16 h-16 rounded-full bg-surface-hover border border-border flex items-center justify-center mb-6">
-              <Bot className="w-8 h-8 text-primary-cyan" />
+              <Bot className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-lg font-bold text-white mb-2">Ready to debug</h3>
             <p className="text-sm text-text-muted mb-6">
@@ -51,7 +51,7 @@ export default function AIAssistant({ analysisState, analysisData, onAnalyze }) 
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               className="w-16 h-16 rounded-full border-2 border-primary-cyan border-t-transparent flex items-center justify-center mb-6"
             >
-              <Sparkles className="w-6 h-6 text-primary-cyan absolute" />
+              <Sparkles className="w-6 h-6 text-white absolute" />
             </motion.div>
             <h3 className="text-lg font-bold text-white mb-2 animate-pulse">Analyzing logic...</h3>
             <p className="text-sm text-text-muted">Scanning for syntax errors, memory leaks, and anti-patterns.</p>

@@ -108,7 +108,7 @@ export function CommandPalette() {
                   <button
                     key={cmd.id}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
-                      isSelected ? 'bg-primary-cyan/10 text-primary-cyan' : 'text-text-muted hover:bg-surface-hover hover:text-white'
+                      isSelected ? 'bg-white\/5 text-white' : 'text-text-muted hover:bg-surface-hover hover:text-white'
                     }`}
                     onClick={() => {
                       navigate(cmd.path);

@@ -13,7 +13,7 @@ export const Button = React.forwardRef(({
   ...props 
 }, ref) => {
   const variants = {
-    primary: 'bg-primary-violet text-white hover:opacity-90',
+    primary: 'bg-white text-black hover:opacity-90',
     secondary: 'bg-surface border border-border text-text hover:bg-surface-hover',
     ghost: 'bg-transparent text-text hover:bg-surface',
     danger: 'bg-error-base text-white hover:opacity-90',
@@ -31,7 +31,7 @@ export const Button = React.forwardRef(({
       ref={ref}
       disabled={isLoading || disabled}
       className={cn(
-        'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-violet disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] hover:-translate-y-0.5',
+        'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] hover:-translate-y-0.5',
         variants[variant],
         sizes[size],
         className

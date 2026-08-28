@@ -34,7 +34,7 @@ export default function DebugHistory() {
       
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-          <History className="w-8 h-8 text-primary-cyan" />
+          <History className="w-8 h-8 text-white" />
           Debug History
         </h1>
         <p className="text-text-muted mt-1">Review your past debugging sessions and AI analyses.</p>

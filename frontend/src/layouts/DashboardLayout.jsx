@@ -50,7 +50,7 @@ export default function DashboardLayout({ children }) {
       {/* Mobile Drawer Overlay */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 border-b border-border bg-background z-40 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
-          <Terminal className="w-5 h-5 text-primary-cyan" />
+          <Terminal className="w-5 h-5 text-white" />
           <span className="font-bold text-lg">KhudSeKrle</span>
         </div>
         <button onClick={toggleMobile} className="p-2 text-text-muted hover:text-white">
@@ -73,7 +73,7 @@ export default function DashboardLayout({ children }) {
                 exit={{ opacity: 0, x: -10 }}
                 className="flex items-center gap-2 overflow-hidden"
               >
-                <Terminal className="w-6 h-6 text-primary-cyan flex-shrink-0" />
+                <Terminal className="w-6 h-6 text-white flex-shrink-0" />
                 <span className="font-bold text-xl tracking-tight whitespace-nowrap">KhudSeKrle</span>
               </motion.div>
             )}
@@ -97,11 +97,11 @@ export default function DashboardLayout({ children }) {
                 to={item.path}
                 className={cn(
                   "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors group relative overflow-hidden",
-                  isActive ? "bg-primary-base/10 text-primary-cyan" : "text-text-muted hover:text-white hover:bg-surface-hover"
+                  isActive ? "bg-primary-base/10 text-white" : "text-text-muted hover:text-white hover:bg-surface-hover"
                 )}
                 title={isCollapsed ? item.name : undefined}
               >
-                <Icon className={cn("w-5 h-5 flex-shrink-0", isActive ? "text-primary-cyan" : "text-text-muted group-hover:text-white")} />
+                <Icon className={cn("w-5 h-5 flex-shrink-0", isActive ? "text-white" : "text-text-muted group-hover:text-white")} />
                 <AnimatePresence mode="popLayout">
                   {!isCollapsed && (
                     <motion.span
@@ -172,7 +172,7 @@ export default function DashboardLayout({ children }) {
               className="lg:hidden fixed top-0 left-0 bottom-0 w-72 bg-surface border-r border-border z-50 flex flex-col"
             >
               <div className="h-16 flex items-center px-6 border-b border-border/50">
-                <Terminal className="w-6 h-6 text-primary-cyan mr-2" />
+                <Terminal className="w-6 h-6 text-white mr-2" />
                 <span className="font-bold text-xl tracking-tight">KhudSeKrle</span>
               </div>
               
@@ -187,7 +187,7 @@ export default function DashboardLayout({ children }) {
                       onClick={() => setMobileOpen(false)}
                       className={cn(
                         "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
-                        isActive ? "bg-primary-base/10 text-primary-cyan font-semibold" : "text-text-muted hover:text-white hover:bg-surface-hover font-medium"
+                        isActive ? "bg-primary-base/10 text-white font-semibold" : "text-text-muted hover:text-white hover:bg-surface-hover font-medium"
                       )}
                     >
                       <Icon className="w-5 h-5" />

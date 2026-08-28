@@ -28,7 +28,7 @@ export default function Challenges() {
                   <Badge variant={c.diff === 'Hard' ? 'danger' : c.diff === 'Medium' ? 'warning' : 'secondary'}>
                     {c.diff}
                   </Badge>
-                  <span className="text-sm font-bold text-primary-cyan flex items-center gap-1">
+                  <span className="text-sm font-bold text-white flex items-center gap-1">
                     <Zap className="w-4 h-4" /> {c.xp} XP
                   </span>
                 </div>

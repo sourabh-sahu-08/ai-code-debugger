@@ -86,9 +86,9 @@ export default function DebugWorkspace() {
   // Dynamic glow color based on analysis state
   const getGlowColor = () => {
     switch (analysisState) {
-      case 'analyzing': return 'shadow-[0_0_40px_-10px_rgba(37,99,235,0.4)] border-primary-base/50';
-      case 'error': return 'shadow-[0_0_40px_-10px_rgba(220,38,38,0.4)] border-error-base/50';
-      case 'success': return 'shadow-[0_0_40px_-10px_rgba(5,150,105,0.4)] border-success-base/50';
+      case 'analyzing': return 'shadow-[0_0_40px_-10px_rgba(255,255,255,0.15)] border-white/20';
+      case 'error': return 'shadow-[0_0_40px_-10px_rgba(220,38,38,0.2)] border-error-base/30';
+      case 'success': return 'shadow-[0_0_40px_-10px_rgba(255,255,255,0.1)] border-white/10';
       default: return 'shadow-none border-border/30';
     }
   };
@@ -97,7 +97,7 @@ export default function DebugWorkspace() {
     <div className="flex h-[calc(100vh-88px)] w-full bg-transparent overflow-hidden relative p-4 gap-4">
       {/* Background Decorators */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary-base/5 rounded-full blur-[100px] mix-blend-screen" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] mix-blend-screen" />
       </div>
 
       {/* File Explorer (Left Panel) - Glass styling */}
@@ -123,7 +123,7 @@ export default function DebugWorkspace() {
             <button
               key={file.id}
               onClick={() => setActiveFileId(file.id)}
-              className={`px-5 h-[80%] rounded-md flex items-center text-sm min-w-[120px] transition-all duration-300 font-medium ${activeFileId === file.id ? 'bg-background shadow-md text-primary-cyan border border-primary-cyan/20' : 'text-text-muted hover:bg-surface-hover hover:text-white border border-transparent'}`}
+              className={`px-5 h-[80%] rounded-md flex items-center text-sm min-w-[120px] transition-all duration-300 font-medium ${activeFileId === file.id ? 'bg-background shadow-md text-white border border-white/20' : 'text-text-muted hover:bg-surface-hover hover:text-white border border-transparent'}`}
             >
               {file.name}
             </button>

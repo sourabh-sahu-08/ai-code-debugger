@@ -16,7 +16,7 @@ export function LoadingState({
       )}
       {...props}
     >
-      <Loader2 className="h-8 w-8 animate-spin text-primary-violet mb-4" />
+      <Loader2 className="h-8 w-8 animate-spin text-text-muted mb-4" />
       <h3 className="text-lg font-semibold text-text">{title}</h3>
       {description && (
         <p className="mt-2 text-sm text-text-muted max-w-sm">

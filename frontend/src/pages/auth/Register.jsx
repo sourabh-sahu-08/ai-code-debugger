@@ -49,7 +49,7 @@ export default function Register() {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 flex flex-col items-center mb-8">
         <Link to="/" className="flex items-center gap-2 mb-6">
-          <Terminal className="w-8 h-8 text-primary-cyan" />
+          <Terminal className="w-8 h-8 text-white" />
           <span className="font-bold text-2xl tracking-tight">KhudSeKrle</span>
         </Link>
       </div>
@@ -130,7 +130,7 @@ export default function Register() {
           <CardFooter className="flex justify-center border-t border-border/50 pt-6">
             <p className="text-sm text-text-muted">
               Already have an account?{' '}
-              <Link to="/auth/login" className="font-medium text-primary-cyan hover:text-primary-electric transition-colors">
+              <Link to="/auth/login" className="font-medium text-white hover:text-primary-electric transition-colors">
                 Sign in
               </Link>
             </p>
