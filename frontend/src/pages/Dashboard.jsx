@@ -24,7 +24,7 @@ export default function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card hoverEffect className="glass-card">
+        <Card hoverEffect>
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-text-muted">Bugs Fixed</span>
@@ -37,7 +37,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
         
-        <Card hoverEffect className="glass-card">
+        <Card hoverEffect>
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-text-muted">Debug Streak</span>
@@ -48,7 +48,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card hoverEffect className="glass-card">
+        <Card hoverEffect>
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-text-muted">Resolution Rate</span>
@@ -59,7 +59,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card hoverEffect className="glass-card">
+        <Card hoverEffect>
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-text-muted">Total XP</span>
@@ -67,7 +67,7 @@ export default function Dashboard() {
             </div>
             <div className="text-3xl font-bold text-text mb-1">42,500</div>
             <div className="w-full bg-surface-strong h-1.5 rounded-full mt-2 overflow-hidden">
-              <div className="bg-primary-violet h-full w-[70%]" />
+              <div className="bg-primary-base h-full w-[70%]" />
             </div>
             <p className="text-xs text-text-muted mt-2">1,500 XP to next level</p>
           </CardContent>

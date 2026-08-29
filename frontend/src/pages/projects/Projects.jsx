@@ -63,7 +63,7 @@ export default function Projects() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map(project => (
-            <Card key={project._id} className="bg-surface/50 border-border/50 hover:border-white\/10 transition-colors group cursor-pointer">
+            <Card key={project._id} className="bg-surface/50 border-border/50 hover:border-primary-base/20 transition-colors group cursor-pointer">
               <CardHeader className="pb-3">
                 <div className="flex justify-between items-start mb-2">
                   <CardTitle className="text-lg group-hover:text-text transition-colors">{project.name}</CardTitle>
