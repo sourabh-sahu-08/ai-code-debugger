@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
@@ -9,9 +9,8 @@ import DebugWorkspace from './components/debugger/DebugWorkspace';
 import Projects from './pages/projects/Projects';
 import DebugHistory from './pages/history/DebugHistory';
 import Friends from './pages/friends/Friends';
-import Learn from './pages/learn/Learn';
-import Challenges from './pages/challenges/Challenges';
-import Achievements from './pages/achievements/Achievements';
+import ProtectedRoute from './components/ProtectedRoute';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -23,30 +22,47 @@ function App() {
       
       {/* Protected App Routes */}
       <Route path="/dashboard" element={
-        <DashboardLayout>
-          <Dashboard />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <Dashboard />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       
       <Route path="/debugger" element={
-        <DashboardLayout>
-          <DebugWorkspace />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <DebugWorkspace />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       
-      {/* Placeholders for remaining dashboard routes */}
-      <Route path="/projects" element={<DashboardLayout><Projects /></DashboardLayout>} />
-      <Route path="/history" element={<DashboardLayout><DebugHistory /></DashboardLayout>} />
+      <Route path="/projects" element={
+        <ProtectedRoute>
+          <DashboardLayout>
+            <Projects />
+          </DashboardLayout>
+        </ProtectedRoute>
+      } />
       
-      {/* Gamification Routes */}
-      <Route path="/learn" element={<DashboardLayout><Learn /></DashboardLayout>} />
-      <Route path="/challenges" element={<DashboardLayout><Challenges /></DashboardLayout>} />
-      <Route path="/achievements" element={<DashboardLayout><Achievements /></DashboardLayout>} />
+      <Route path="/history" element={
+        <ProtectedRoute>
+          <DashboardLayout>
+            <DebugHistory />
+          </DashboardLayout>
+        </ProtectedRoute>
+      } />
       
-      <Route path="/friends" element={<DashboardLayout><Friends /></DashboardLayout>} />
-      <Route path="/community" element={<DashboardLayout><div className="p-8 text-text">Community Coming Soon</div></DashboardLayout>} />
-      <Route path="/profile" element={<DashboardLayout><div className="p-8 text-text">Profile Coming Soon</div></DashboardLayout>} />
-      <Route path="/settings" element={<DashboardLayout><div className="p-8 text-text">Settings Coming Soon</div></DashboardLayout>} />
+      <Route path="/friends" element={
+        <ProtectedRoute>
+          <DashboardLayout>
+            <Friends />
+          </DashboardLayout>
+        </ProtectedRoute>
+      } />
+      
+      {/* Catch-all 404 */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
