@@ -6,13 +6,7 @@ import {
   Terminal, 
   FolderGit2, 
   History, 
-  GraduationCap, 
-  Trophy, 
-  Users, 
-  MessageSquare, 
-  Medal, 
-  User, 
-  Settings,
+  Users,
   Menu,
   X,
   ChevronLeft,
@@ -22,23 +16,21 @@ import {
 import { cn } from '../utils/cn';
 import { Avatar } from '../components/ui/Avatar';
 import { CommandPalette } from '../components/ui/CommandPalette';
+import { useAuth } from '../contexts/AuthContext';
 
 const navItems = [
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
   { name: 'AI Debugger', path: '/debugger', icon: Terminal },
   { name: 'My Projects', path: '/projects', icon: FolderGit2 },
   { name: 'Debug History', path: '/history', icon: History },
-  { name: 'Learn', path: '/learn', icon: GraduationCap },
-  { name: 'Challenges', path: '/challenges', icon: Trophy },
-  { name: 'Friends', path: '/friends', icon: Users },
-  { name: 'Community', path: '/community', icon: MessageSquare },
-  { name: 'Achievements', path: '/achievements', icon: Medal },
+  { name: 'Friends', path: '/friends', icon: Users }
 ];
 
 export default function DashboardLayout({ children }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   const toggleSidebar = () => setIsCollapsed(!isCollapsed);
   const toggleMobile = () => setMobileOpen(!mobileOpen);
@@ -121,32 +113,22 @@ export default function DashboardLayout({ children }) {
             )
           })}
 
-          <div className="mt-8 pt-4 border-t border-border/50 px-2 space-y-1">
-            <Link to="/profile" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-text hover:bg-surface-hover transition-colors">
-              <User className="w-5 h-5 flex-shrink-0" />
-              {!isCollapsed && <span className="text-sm font-medium whitespace-nowrap">Profile</span>}
-            </Link>
-            <Link to="/settings" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:text-text hover:bg-surface-hover transition-colors">
-              <Settings className="w-5 h-5 flex-shrink-0" />
-              {!isCollapsed && <span className="text-sm font-medium whitespace-nowrap">Settings</span>}
-            </Link>
-          </div>
         </div>
 
         <div className="p-4 border-t border-border/50 flex items-center justify-between flex-shrink-0">
           <div className="flex items-center gap-3 overflow-hidden">
-            <Avatar fallback="SD" className="w-9 h-9 border-border bg-surface-hover text-sm font-bold flex-shrink-0" />
+            <Avatar fallback={user?.name?.charAt(0)?.toUpperCase() || 'U'} className="w-9 h-9 border-border bg-surface-hover text-sm font-bold flex-shrink-0" />
             <AnimatePresence mode="popLayout">
               {!isCollapsed && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col whitespace-nowrap">
-                  <span className="text-sm font-bold text-text">Senior Dev</span>
-                  <span className="text-xs text-text-muted">Level 42</span>
+                  <span className="text-sm font-bold text-text truncate w-32">{user?.name || 'User'}</span>
+                  <span className="text-xs text-text-muted truncate w-32">@{user?.username || 'developer'}</span>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
           {!isCollapsed && (
-            <button className="p-2 text-text-muted hover:text-error-base transition-colors rounded-md hover:bg-error-base/10">
+            <button onClick={logout} className="p-2 text-text-muted hover:text-error-base transition-colors rounded-md hover:bg-error-base/10">
               <LogOut className="w-4 h-4" />
             </button>
           )}
@@ -199,15 +181,14 @@ export default function DashboardLayout({ children }) {
 
               <div className="p-6 border-t border-border/50">
                 <div className="flex items-center gap-3 mb-6">
-                  <Avatar fallback="SD" className="w-10 h-10 border-border bg-surface-hover" />
+                  <Avatar fallback={user?.name?.charAt(0)?.toUpperCase() || 'U'} className="w-10 h-10 border-border bg-surface-hover" />
                   <div className="flex flex-col">
-                    <span className="text-sm font-bold text-text">Senior Dev</span>
-                    <span className="text-xs text-text-muted">Level 42</span>
+                    <span className="text-sm font-bold text-text">{user?.name || 'User'}</span>
+                    <span className="text-xs text-text-muted">@{user?.username || 'developer'}</span>
                   </div>
                 </div>
-                <div className="flex justify-between items-center text-sm font-medium text-text-muted">
-                  <Link to="/settings" onClick={() => setMobileOpen(false)} className="hover:text-text transition-colors">Settings</Link>
-                  <button className="text-error-base hover:text-error-soft transition-colors flex items-center gap-1">
+                <div className="flex justify-end items-center text-sm font-medium text-text-muted">
+                  <button onClick={logout} className="text-error-base hover:text-error-soft transition-colors flex items-center gap-1">
                     <LogOut className="w-4 h-4" /> Sign Out
                   </button>
                 </div>
