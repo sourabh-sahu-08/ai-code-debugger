@@ -7,6 +7,7 @@ export const Input = React.forwardRef(({
   error,
   leftIcon: LeftIcon,
   rightIcon: RightIcon,
+  onRightIconClick,
   ...props
 }, ref) => {
   return (
@@ -29,7 +30,13 @@ export const Input = React.forwardRef(({
         {...props}
       />
       {RightIcon && (
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted flex items-center justify-center pointer-events-none">
+        <div 
+          className={cn(
+            "absolute right-3 top-1/2 -translate-y-1/2 text-text-muted flex items-center justify-center",
+            onRightIconClick ? "cursor-pointer hover:text-text" : "pointer-events-none"
+          )}
+          onClick={onRightIconClick}
+        >
           <RightIcon className="h-4 w-4" />
         </div>
       )}
