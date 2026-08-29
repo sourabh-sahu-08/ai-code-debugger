@@ -1,50 +1,99 @@
-import React from 'react';
-import { Bug, Flame, Target, Trophy, ArrowRight, Activity, Code2, Zap, Terminal } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/ui/Card';
-import { Button } from '../components/ui/Button';
+import React, { useState, useEffect } from 'react';
+import { Activity, Target, Bug, FolderGit2, Code2, Terminal } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
-import { Link } from 'react-router-dom';
+import { Button } from '../components/ui/Button';
+import { useAuth } from '../contexts/AuthContext';
+import { projectService } from '../services/projectService';
+import { historyService } from '../services/historyService';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({
+    totalProjects: 0,
+    totalAnalyses: 0,
+    bugsFixed: 0,
+    resolutionRate: 0,
+  });
+  const [recentSessions, setRecentSessions] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [projectsRes, historyRes] = await Promise.all([
+          projectService.getProjects(),
+          historyService.getHistory()
+        ]);
+        
+        const projects = projectsRes.data || [];
+        const history = historyRes.data || [];
+        
+        const resolved = history.filter(h => h.status === 'Resolved').length;
+        const total = history.length;
+        
+        setStats({
+          totalProjects: projects.length,
+          totalAnalyses: total,
+          bugsFixed: resolved,
+          resolutionRate: total > 0 ? Math.round((resolved / total) * 100) : 0
+        });
+
+        setRecentSessions(history.slice(0, 5));
+      } catch (error) {
+        console.error('Dashboard data fetch error:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
+  }, []);
+
   return (
-    <div className="max-w-7xl mx-auto w-full p-6 lg:p-10 space-y-8">
+    <div className="max-w-7xl mx-auto w-full p-6 lg:p-10 space-y-8 animate-in fade-in duration-500">
       
-      {/* Welcome Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-1 text-text">Good evening, Developer 👋</h1>
-          <p className="text-text-muted">Ready to squash some bugs and level up?</p>
-        </div>
-        <Link to="/debugger">
-          <Button rightIcon={<ArrowRight className="w-4 h-4" />}>
-            Start Debugging Session
-          </Button>
-        </Link>
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-text">
+          Welcome back, {user?.name?.split(' ')[0] || 'Developer'}!
+        </h1>
+        <p className="text-text-muted mt-1">Here is a summary of your debugging activity.</p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card hoverEffect>
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm font-medium text-text-muted">Bugs Fixed</span>
-              <Bug className="w-5 h-5 text-text" />
+              <span className="text-sm font-medium text-text-muted">Total Projects</span>
+              <FolderGit2 className="w-5 h-5 text-primary-base" />
             </div>
-            <div className="text-3xl font-bold text-text mb-1">1,248</div>
-            <p className="text-xs text-success-base flex items-center gap-1">
-              <Activity className="w-3 h-3" /> +12 this week
-            </p>
+            <div className="text-3xl font-bold text-text mb-1">{loading ? '-' : stats.totalProjects}</div>
           </CardContent>
         </Card>
         
         <Card hoverEffect>
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm font-medium text-text-muted">Debug Streak</span>
-              <Flame className="w-5 h-5 text-orange-500" />
+              <span className="text-sm font-medium text-text-muted">Total Analyses</span>
+              <Activity className="w-5 h-5 text-accent" />
             </div>
-            <div className="text-3xl font-bold text-text mb-1">14 Days</div>
-            <p className="text-xs text-text-muted">Keep it up to hit level 43!</p>
+            <div className="text-3xl font-bold text-text mb-1">{loading ? '-' : stats.totalAnalyses}</div>
+          </CardContent>
+        </Card>
+
+        <Card hoverEffect>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm font-medium text-text-muted">Bugs Fixed</span>
+              <Bug className="w-5 h-5 text-success-base" />
+            </div>
+            <div className="text-3xl font-bold text-text mb-1">{loading ? '-' : stats.bugsFixed}</div>
           </CardContent>
         </Card>
 
@@ -52,126 +101,81 @@ export default function Dashboard() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-text-muted">Resolution Rate</span>
-              <Target className="w-5 h-5 text-success-base" />
+              <Target className="w-5 h-5 text-primary-base" />
             </div>
-            <div className="text-3xl font-bold text-text mb-1">94%</div>
-            <p className="text-xs text-success-base">Top 10% of users</p>
-          </CardContent>
-        </Card>
-
-        <Card hoverEffect>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-sm font-medium text-text-muted">Total XP</span>
-              <Zap className="w-5 h-5 text-text-muted" />
-            </div>
-            <div className="text-3xl font-bold text-text mb-1">42,500</div>
-            <div className="w-full bg-surface-strong h-1.5 rounded-full mt-2 overflow-hidden">
-              <div className="bg-primary-base h-full w-[70%]" />
-            </div>
-            <p className="text-xs text-text-muted mt-2">1,500 XP to next level</p>
+            <div className="text-3xl font-bold text-text mb-1">{loading ? '-' : `${stats.resolutionRate}%`}</div>
           </CardContent>
         </Card>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        {/* Left Column: Sessions & AI Insights */}
+        {/* Left Column: Sessions */}
         <div className="lg:col-span-2 space-y-8">
-          
-          {/* AI Insights Card */}
-          <Card hoverEffect className="relative overflow-hidden bg-gradient-to-br from-primary-base/10 to-surface border-primary-base/20">
-            {/* Neural SVG Decoration */}
-            <svg className="absolute right-0 top-0 w-64 h-full opacity-20 pointer-events-none" viewBox="0 0 200 100">
-              <path d="M50,50 L100,20 L150,50 L100,80 Z" fill="none" stroke="currentColor" className="text-text" strokeWidth="1" />
-              <circle cx="50" cy="50" r="4" fill="currentColor" className="text-text animate-pulse" />
-              <circle cx="100" cy="20" r="4" fill="currentColor" className="text-text animate-pulse" style={{ animationDelay: '0.2s' }} />
-              <circle cx="150" cy="50" r="4" fill="currentColor" className="text-text animate-pulse" style={{ animationDelay: '0.4s' }} />
-              <circle cx="100" cy="80" r="4" fill="currentColor" className="text-text animate-pulse" style={{ animationDelay: '0.6s' }} />
-              <path d="M100,20 L100,80 M50,50 L150,50" fill="none" stroke="currentColor" className="text-text-muted opacity-50" strokeWidth="0.5" />
-            </svg>
-            
-            <CardHeader className="relative z-10">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Zap className="w-5 h-5 text-yellow-400" /> AI Insight
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="relative z-10">
-              <p className="text-text/90">
-                "You frequently encounter asynchronous JavaScript errors inside `useEffect` hooks. I recommend reviewing React's documentation on data fetching and cleanup functions to avoid memory leaks and stale closures."
-              </p>
-              <Button variant="ghost" size="sm" className="mt-4 text-text px-0">
-                View recommended learning module &rarr;
-              </Button>
-            </CardContent>
-          </Card>
-
-          {/* Recent Sessions */}
-          <Card hoverEffect className="border-border/50">
+          <Card hoverEffect className="border-border">
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
                 <CardTitle className="text-lg">Recent Sessions</CardTitle>
                 <CardDescription>Your latest debugging activity</CardDescription>
               </div>
-              <Button variant="ghost" size="sm">View All</Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/history')}>View All</Button>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {[
-                  { lang: 'React', error: 'TypeError: Cannot read properties of undefined', status: 'Resolved', time: '2 hours ago', icon: Code2 },
-                  { lang: 'Python', error: 'IndentationError: unexpected indent', status: 'Resolved', time: 'Yesterday', icon: Terminal },
-                  { lang: 'Node.js', error: 'UnhandledPromiseRejectionWarning', status: 'Open', time: '2 days ago', icon: Bug }
-                ].map((session, i) => (
-                  <div key={i} className="flex items-center justify-between p-4 rounded-lg bg-surface/50 border border-border hover:border-border transition-colors cursor-pointer">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-md bg-surface-strong flex items-center justify-center">
-                        <session.icon className="w-5 h-5 text-text-muted" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-semibold text-sm text-text">{session.lang}</span>
-                          <Badge variant={session.status === 'Resolved' ? 'success' : 'secondary'} size="sm" className="text-[10px]">
-                            {session.status}
-                          </Badge>
+              {loading ? (
+                 <div className="space-y-4">
+                   {[1,2,3].map(i => <div key={i} className="h-16 bg-surface-strong/50 rounded-lg animate-pulse" />)}
+                 </div>
+              ) : recentSessions.length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-sm text-text-muted mb-4">No recent debugging sessions.</p>
+                  <Button variant="outline" onClick={() => navigate('/debugger')}>Start Debugging</Button>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {recentSessions.map((session) => (
+                    <div 
+                      key={session._id} 
+                      onClick={() => navigate(`/debugger?session=${session._id}`)}
+                      className="flex items-center justify-between p-4 rounded-lg bg-surface border border-border hover:border-primary-base/30 hover:shadow-sm transition-all cursor-pointer"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-md bg-surface-strong flex items-center justify-center">
+                          <Code2 className="w-5 h-5 text-text-muted" />
                         </div>
-                        <p className="text-xs text-text-muted truncate max-w-[200px] sm:max-w-xs">{session.error}</p>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-semibold text-sm text-text">{session.language}</span>
+                            <Badge variant={session.status === 'Resolved' ? 'success' : 'outline'} size="sm" className="text-[10px]">
+                              {session.status}
+                            </Badge>
+                          </div>
+                          <p className="text-xs text-text-muted truncate max-w-[250px] sm:max-w-xs">{session.aiResponse?.summary || 'Code Analysis'}</p>
+                        </div>
                       </div>
+                      <span className="text-xs text-text-muted hidden sm:block">
+                        {new Date(session.createdAt).toLocaleDateString()}
+                      </span>
                     </div>
-                    <span className="text-xs text-text-muted hidden sm:block">{session.time}</span>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </CardContent>
           </Card>
-
         </div>
 
-        {/* Right Column: Daily Challenge */}
+        {/* Right Column: Quick Actions */}
         <div className="space-y-8">
-          <Card hoverEffect className="border-border/50 bg-surface/50 overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full blur-[40px]" />
+          <Card className="border-border bg-surface">
             <CardHeader>
-              <div className="flex items-center gap-2 mb-2">
-                <Trophy className="w-5 h-5 text-yellow-500" />
-                <CardTitle className="text-lg text-text">Daily Challenge</CardTitle>
-              </div>
-              <CardDescription>Test your skills and earn XP</CardDescription>
+              <CardTitle className="text-lg text-text">Quick Actions</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 relative z-10">
-              <div className="p-4 rounded-lg bg-surface border border-border">
-                <div className="flex items-center justify-between mb-2">
-                  <Badge variant="secondary" className="text-yellow-500 bg-yellow-500/10 border-none">Hard</Badge>
-                  <span className="text-xs font-bold text-text">+500 XP</span>
-                </div>
-                <h4 className="font-bold text-text mb-2 text-sm">Memory Leak in React</h4>
-                <p className="text-xs text-text-muted mb-4 leading-relaxed">
-                  Fix the memory leak caused by an unmounted component still receiving socket events.
-                </p>
-                <div className="flex items-center gap-2 text-xs text-text-muted">
-                  <Activity className="w-4 h-4" /> Estimated time: 15 mins
-                </div>
-              </div>
-              <Button className="w-full">Accept Challenge</Button>
+            <CardContent className="space-y-3">
+              <Button className="w-full justify-start" variant="secondary" onClick={() => navigate('/debugger')}>
+                <Terminal className="w-4 h-4 mr-2" /> New Debug Session
+              </Button>
+              <Button className="w-full justify-start" variant="outline" onClick={() => navigate('/projects')}>
+                <FolderGit2 className="w-4 h-4 mr-2" /> Manage Projects
+              </Button>
             </CardContent>
           </Card>
         </div>
