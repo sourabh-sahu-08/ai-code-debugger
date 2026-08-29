@@ -114,36 +114,9 @@ export default function Landing() {
               </motion.div>
             </motion.div>
 
-            {/* Right Side - Black Hole Container */}
+            {/* Right Side - Hero Visual Container */}
             <div className="w-full h-full min-h-[400px] lg:min-h-[600px] relative flex items-center justify-center order-1 lg:order-2">
-              <BlackHole />
-              
-              {/* Floating UI Badges Anchored to the visual center */}
-              <div className="absolute inset-0 z-10 pointer-events-none hidden sm:block">
-                <motion.div 
-                  animate={{ y: [0, -15, 0] }} 
-                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute top-[20%] right-[10%] glass-card px-4 py-2.5 rounded-lg flex items-center gap-2 border-border/50 text-text text-sm shadow-2xl bg-surface"
-                >
-                  <Zap className="w-4 h-4 text-text" /> Bug Detected
-                </motion.div>
-                
-                <motion.div 
-                  animate={{ x: [0, 10, 0], y: [0, 5, 0] }} 
-                  transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute bottom-[25%] right-[20%] glass-card px-4 py-2.5 rounded-lg flex items-center gap-2 border-border/50 text-text text-sm shadow-2xl bg-surface"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-text" /> Root Cause Found
-                </motion.div>
-                
-                <motion.div 
-                  animate={{ y: [0, -10, 0], x: [0, -5, 0] }} 
-                  transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                  className="absolute top-[60%] left-[5%] glass-card px-4 py-2.5 rounded-lg flex items-center gap-2 border-border/50 text-text text-sm shadow-2xl bg-surface"
-                >
-                  <Terminal className="w-4 h-4 text-text" /> <span className="font-mono">{`>_`} Line 42</span>
-                </motion.div>
-              </div>
+              <HeroVisual />
             </div>
           </div>
         </section>
