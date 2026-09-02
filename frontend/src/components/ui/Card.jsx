@@ -41,8 +41,8 @@ export const Card = React.forwardRef(({ className, children, hoverEffect = false
       onMouseLeave={handleMouseLeave}
       style={styleProp}
       className={cn(
-        'rounded-xl border border-border bg-surface text-text shadow-sm relative overflow-hidden',
-        hoverEffect && 'transition-all duration-300 hover:shadow-lg hover:border-primary-base/20 hover:-translate-y-1',
+        'rounded-xl border border-border bg-surface/50 backdrop-blur-2xl text-text shadow-sm relative overflow-hidden',
+        hoverEffect && 'transition-all duration-300 hover:shadow-lg hover:border-white/20 hover:-translate-y-1',
         className
       )}
       {...props}
