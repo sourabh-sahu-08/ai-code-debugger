@@ -13,7 +13,7 @@ export const Button = React.forwardRef(({
   ...props 
 }, ref) => {
   const variants = {
-    primary: 'bg-primary-base text-white hover:opacity-90 shadow-sm',
+    primary: 'bg-primary-base text-black hover:opacity-90 shadow-sm',
     secondary: 'bg-surface border border-border text-text hover:bg-surface-soft shadow-sm',
     ghost: 'bg-transparent text-text-muted hover:text-text hover:bg-surface-soft',
     danger: 'bg-error-base text-white hover:opacity-90 shadow-sm',
