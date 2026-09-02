@@ -7,6 +7,20 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { motion } from 'framer-motion';
 import { authService } from '../../services/authService';
 import { useToast } from '../../contexts/ToastContext';
+import './Auth.css';
+
+const AuthBackground = () => (
+  <div className="auth-video-wrapper">
+    <video autoPlay muted loop playsInline preload="auto" className="auth-video">
+      <source src="/auth-bg.mp4" type="video/mp4" />
+    </video>
+    <div className="auth-video-overlay" />
+    <div className="auth-ambient-glow-layer">
+      <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-white rounded-full blur-[120px] opacity-[0.05]" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-[#A1A1A1] rounded-full blur-[120px] opacity-[0.05]" />
+    </div>
+  </div>
+);
 
 export default function Register() {
   const navigate = useNavigate();
@@ -39,16 +53,13 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-text flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-      
-      <div className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
-        <div className="w-[600px] h-[600px] bg-primary-base/5 rounded-full blur-[100px] mix-blend-screen" />
-      </div>
+    <div className="dark-auth flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <AuthBackground />
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 flex flex-col items-center mb-8">
         <Link to="/" className="flex items-center gap-2 mb-6">
-          <Terminal className="w-8 h-8 text-text" />
-          <span className="font-bold text-2xl tracking-tight">KhudSeKrle</span>
+          <Terminal className="w-8 h-8 text-white" />
+          <span className="font-bold text-2xl tracking-tight text-white">KhudSeKrle</span>
         </Link>
       </div>
 
@@ -57,23 +68,23 @@ export default function Register() {
         animate={{ opacity: 1, y: 0 }}
         className="sm:mx-auto sm:w-full sm:max-w-md relative z-10"
       >
-        <Card className="bg-surface border-border backdrop-blur-xl shadow-lg">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl">Create an account</CardTitle>
-            <CardDescription>Join the debugging revolution</CardDescription>
+        <Card className="auth-glass-panel border-white/10 rounded-2xl bg-transparent shadow-2xl">
+          <CardHeader className="text-center pb-2">
+            <CardTitle className="text-2xl text-white font-semibold">Create an account</CardTitle>
+            <CardDescription className="text-[#A1A1A1]">Join the debugging revolution</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-4">
             <form onSubmit={handleSubmit} className="space-y-4">
               
               {error && (
-                <div className="p-3 rounded-md bg-error-soft border border-error-base/20 text-error-base text-sm">
+                <div className="p-3 rounded-md bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
                   {error}
                 </div>
               )}
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label htmlFor="name" className="block text-sm font-medium text-text-muted">Full Name</label>
+                <div className="space-y-1.5">
+                  <label htmlFor="name" className="block text-sm font-medium text-[#D4D4D4]">Full Name</label>
                   <Input 
                     id="name" 
                     name="name" 
@@ -84,10 +95,11 @@ export default function Register() {
                     value={formData.name}
                     onChange={handleChange}
                     disabled={loading}
+                    className="auth-input text-white placeholder-white/30"
                   />
                 </div>
-                <div className="space-y-1">
-                  <label htmlFor="username" className="block text-sm font-medium text-text-muted">Username</label>
+                <div className="space-y-1.5">
+                  <label htmlFor="username" className="block text-sm font-medium text-[#D4D4D4]">Username</label>
                   <Input 
                     id="username" 
                     name="username" 
@@ -98,12 +110,13 @@ export default function Register() {
                     value={formData.username}
                     onChange={handleChange}
                     disabled={loading}
+                    className="auth-input text-white placeholder-white/30"
                   />
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <label htmlFor="email" className="block text-sm font-medium text-text-muted">Email address</label>
+              <div className="space-y-1.5">
+                <label htmlFor="email" className="block text-sm font-medium text-[#D4D4D4]">Email address</label>
                 <Input 
                   id="email" 
                   name="email" 
@@ -114,11 +127,12 @@ export default function Register() {
                   value={formData.email}
                   onChange={handleChange}
                   disabled={loading}
+                  className="auth-input text-white placeholder-white/30"
                 />
               </div>
 
-              <div className="space-y-1">
-                <label htmlFor="password" className="block text-sm font-medium text-text-muted">Password</label>
+              <div className="space-y-1.5">
+                <label htmlFor="password" className="block text-sm font-medium text-[#D4D4D4]">Password</label>
                 <Input 
                   id="password" 
                   name="password" 
@@ -131,18 +145,19 @@ export default function Register() {
                   value={formData.password}
                   onChange={handleChange}
                   disabled={loading}
+                  className="auth-input text-white placeholder-white/30"
                 />
               </div>
 
-              <Button type="submit" className="w-full mt-2" isLoading={loading} disabled={loading} rightIcon={!loading && <ArrowRight className="w-4 h-4" />}>
+              <Button type="submit" className="auth-button-primary w-full mt-4 rounded-xl py-6 flex items-center justify-center font-medium" isLoading={loading} disabled={loading} rightIcon={!loading && <ArrowRight className="w-4 h-4" />}>
                 Create Account
               </Button>
             </form>
           </CardContent>
-          <CardFooter className="flex justify-center border-t border-border pt-6">
-            <p className="text-sm text-text-muted">
+          <CardFooter className="flex justify-center border-t border-white/10 pt-6 pb-2">
+            <p className="text-sm text-[#A1A1A1]">
               Already have an account?{' '}
-              <Link to="/auth/login" className="font-medium text-text hover:text-primary-base transition-colors">
+              <Link to="/auth/login" className="font-medium text-white hover:text-[#D4D4D4] transition-colors">
                 Sign in
               </Link>
             </p>
