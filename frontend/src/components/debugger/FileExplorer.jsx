@@ -12,7 +12,7 @@ export default function FileExplorer({ files, activeFile, onSelectFile }) {
   return (
     <div className="flex flex-col h-full w-[220px] flex-shrink-0 hidden md:flex">
       
-      <div className="h-[40px] flex items-center justify-between px-3 border-b border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)]">
+      <div className="h-[40px] flex items-center justify-between px-3 border-b border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)]">
         <span className="text-[10px] font-bold uppercase tracking-widest text-[#A1A1A1] flex items-center gap-1.5">
           <FolderOpen className="w-3 h-3" /> WORKSPACE <span className="opacity-50 text-[9px] bg-white/10 px-1 rounded ml-1">{files.length}</span>
         </span>
@@ -36,7 +36,7 @@ export default function FileExplorer({ files, activeFile, onSelectFile }) {
           <div 
             key={file.id}
             onClick={() => onSelectFile(file.id)}
-            className={`flex items-center justify-between pl-5 pr-2 py-1 rounded text-[13px] cursor-pointer group transition-colors ${activeFile === file.id ? 'bg-[rgba(255,255,255,0.08)] text-white font-medium' : 'text-[#A1A1A1] hover:bg-[rgba(255,255,255,0.04)] hover:text-white'}`}
+            className={`flex items-center justify-between pl-5 pr-2 py-1 rounded text-[13px] cursor-pointer group transition-colors ${activeFile === file.id ? 'bg-[rgba(255,255,255,0.06)] text-white font-medium relative before:content-[""] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[2px] before:h-[14px] before:bg-white before:rounded-r' : 'text-[#A1A1A1] hover:bg-[rgba(255,255,255,0.04)] hover:text-white'}`}
           >
             <div className="flex items-center gap-2 overflow-hidden">
               {getFileIcon(file.name)}
