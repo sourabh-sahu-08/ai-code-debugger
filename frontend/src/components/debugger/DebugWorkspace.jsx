@@ -58,10 +58,10 @@ export default function DebugWorkspace() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-64px)] lg:h-full w-full bg-transparent overflow-hidden relative">
+    <div className="flex flex-1 h-[calc(100vh-64px)] lg:h-full w-full bg-transparent overflow-hidden relative">
       
       {/* File Explorer (Left Panel) */}
-      <div className="h-full z-10 hidden md:block bg-[rgba(10,10,10,0.82)] backdrop-blur-[16px] border-r border-[rgba(255,255,255,0.05)] flex-shrink-0">
+      <div className="h-full z-10 hidden md:block bg-transparent backdrop-blur-[16px] border-r border-[rgba(255,255,255,0.05)] flex-shrink-0">
         <FileExplorer 
           files={files} 
           activeFile={activeFileId} 
@@ -70,7 +70,7 @@ export default function DebugWorkspace() {
       </div>
       
       {/* Editor Center Stage */}
-      <div className={`flex flex-col flex-1 h-full min-w-0 z-10 bg-[rgba(10,10,10,0.4)] backdrop-blur-[10px] transition-all duration-700`}>
+      <div className={`flex flex-col flex-1 h-full min-w-0 z-10 bg-transparent backdrop-blur-[10px] transition-all duration-700`}>
         
         {/* Editor Toolbar / Frame Header */}
         <div className="h-[40px] bg-[rgba(255,255,255,0.02)] border-b border-[rgba(255,255,255,0.05)] flex items-center px-3 flex-shrink-0">
@@ -104,7 +104,7 @@ export default function DebugWorkspace() {
       </div>
 
       {/* AI Assistant (Right Panel) */}
-      <div className="h-full w-[360px] z-10 hidden lg:block bg-[rgba(12,12,12,0.6)] backdrop-blur-[12px] border-l border-[rgba(255,255,255,0.05)] flex-shrink-0 relative flex flex-col">
+      <div className="h-full w-[360px] z-10 hidden lg:block bg-transparent backdrop-blur-[12px] border-l border-[rgba(255,255,255,0.05)] flex-shrink-0 relative flex flex-col">
         <AIAssistant 
           analysisState={analysisState} 
           analysisData={analysisData}
