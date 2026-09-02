@@ -26,6 +26,19 @@ const navItems = [
   { name: 'Friends', path: '/friends', icon: Users }
 ];
 
+const DashboardBackground = () => (
+  <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-black">
+    <video autoPlay muted loop playsInline preload="auto" className="w-[100vw] h-[100vh] object-cover opacity-40 grayscale contrast-110">
+      <source src="/dashboard-bg.mp4" type="video/mp4" />
+    </video>
+    <div className="absolute inset-0 bg-gradient-to-b from-black/55 to-black/85 z-10" />
+    <div className="absolute inset-0 z-20 pointer-events-none">
+      <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-white rounded-full blur-[120px] opacity-[0.03]" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-[#A1A1A1] rounded-full blur-[120px] opacity-[0.03]" />
+    </div>
+  </div>
+);
+
 export default function DashboardLayout({ children }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -36,11 +49,12 @@ export default function DashboardLayout({ children }) {
   const toggleMobile = () => setMobileOpen(!mobileOpen);
 
   return (
-    <div className="min-h-screen bg-background flex overflow-hidden">
+    <div className="min-h-screen bg-transparent flex overflow-hidden text-text">
+      <DashboardBackground />
       <CommandPalette />
       
       {/* Mobile Drawer Overlay */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 border-b border-border bg-background z-40 flex items-center justify-between px-4">
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 border-b border-border bg-surface/80 backdrop-blur-md z-40 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <Terminal className="w-5 h-5 text-text" />
           <span className="font-bold text-lg">KhudSeKrle</span>
@@ -54,7 +68,7 @@ export default function DashboardLayout({ children }) {
       <motion.aside 
         animate={{ width: isCollapsed ? 80 : 260 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="hidden lg:flex flex-col h-full bg-surface border-r border-border relative z-30"
+        className="hidden lg:flex flex-col h-full bg-surface/50 backdrop-blur-2xl border-r border-border relative z-30"
       >
         <div className="h-16 flex items-center justify-between px-4 border-b border-border/50 flex-shrink-0">
           <AnimatePresence mode="popLayout">
@@ -199,7 +213,7 @@ export default function DashboardLayout({ children }) {
       </AnimatePresence>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col h-full relative pt-16 lg:pt-0 overflow-y-auto bg-background">
+      <main className="flex-1 flex flex-col h-full relative pt-16 lg:pt-0 overflow-y-auto bg-transparent z-10">
         {children}
       </main>
 
