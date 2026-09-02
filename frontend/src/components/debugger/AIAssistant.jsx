@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, AlertTriangle, Lightbulb, ChevronRight, CheckCircle2, Bot, Info, CornerDownLeft } from 'lucide-react';
 
-export default function AIAssistant({ analysisState, analysisData, onAnalyze }) {
+export default function AIAssistant({ analysisState, analysisData, onAnalyze, onApplyFix }) {
+  const [prompt, setPrompt] = useState('');
   
   return (
     <div className="flex flex-col h-full w-full flex-shrink-0">
@@ -110,10 +111,10 @@ export default function AIAssistant({ analysisState, analysisData, onAnalyze }) 
                 </div>
 
                 <div className="flex gap-2">
-                  <button className="flex-1 bg-white text-black text-[13px] font-medium py-2 rounded-md hover:bg-[#E5E5E5] transition-colors">
+                  <button onClick={onApplyFix} className="flex-1 bg-white text-black text-[13px] font-medium py-2 rounded-md hover:bg-[#E5E5E5] transition-colors">
                     Apply Fix
                   </button>
-                  <button className="px-4 bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-[#F5F5F5] text-[13px] font-medium py-2 rounded-md hover:bg-[rgba(255,255,255,0.08)] transition-colors">
+                  <button onClick={() => navigator.clipboard.writeText(analysisData?.suggestedFix || '')} className="px-4 bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-[#F5F5F5] text-[13px] font-medium py-2 rounded-md hover:bg-[rgba(255,255,255,0.08)] transition-colors">
                     Copy
                   </button>
                 </div>
@@ -130,12 +131,20 @@ export default function AIAssistant({ analysisState, analysisData, onAnalyze }) 
         <div className="relative flex items-center">
           <input 
             type="text" 
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
             placeholder="Ask AI about your code..."
             className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-[13px] text-[#F5F5F5] rounded-md pl-3 pr-24 py-2.5 focus:outline-none focus:border-[rgba(255,255,255,0.16)] placeholder-[#A1A1A1] transition-colors"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                onAnalyze(prompt);
+                setPrompt('');
+              }
+            }}
           />
           <div className="absolute right-2 flex items-center gap-1.5 opacity-60">
             <span className="text-[10px] font-medium text-[#A1A1A1]">⌘ Enter</span>
-            <button onClick={onAnalyze} className="p-1 bg-white/10 rounded hover:bg-white/20 text-[#F5F5F5] transition-colors">
+            <button onClick={() => { onAnalyze(prompt); setPrompt(''); }} className="p-1 bg-white/10 rounded hover:bg-white/20 text-[#F5F5F5] transition-colors">
               <CornerDownLeft className="w-3 h-3" />
             </button>
           </div>
