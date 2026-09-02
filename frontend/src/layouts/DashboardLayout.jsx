@@ -102,12 +102,14 @@ export default function DashboardLayout({ children }) {
                 key={item.path}
                 to={item.path}
                 className={cn(
-                  "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors group relative overflow-hidden",
-                  isActive ? "bg-primary-soft text-primary-base" : "text-text-muted hover:text-text hover:bg-surface-hover"
+                  "flex items-center gap-3 px-3 py-2.5 transition-colors group relative overflow-hidden",
+                  isActive 
+                    ? "bg-white/10 border-l-2 border-white text-white" 
+                    : "border-l-2 border-transparent text-[#A1A1A1] hover:text-white hover:bg-white/5"
                 )}
                 title={isCollapsed ? item.name : undefined}
               >
-                <Icon className={cn("w-5 h-5 flex-shrink-0", isActive ? "text-text" : "text-text-muted group-hover:text-text")} />
+                <Icon className={cn("w-5 h-5 flex-shrink-0", isActive ? "text-white" : "text-[#A1A1A1] group-hover:text-white")} />
                 <AnimatePresence mode="popLayout">
                   {!isCollapsed && (
                     <motion.span
@@ -120,9 +122,6 @@ export default function DashboardLayout({ children }) {
                     </motion.span>
                   )}
                 </AnimatePresence>
-                {isActive && (
-                  <motion.div layoutId="active-nav" className="absolute left-0 top-0 bottom-0 w-1 bg-primary-base rounded-r-full" />
-                )}
               </Link>
             )
           })}

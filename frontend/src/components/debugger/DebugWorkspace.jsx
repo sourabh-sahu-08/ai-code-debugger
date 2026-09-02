@@ -58,10 +58,10 @@ export default function DebugWorkspace() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-88px)] w-full bg-background overflow-hidden relative p-4 gap-4">
+    <div className="flex h-[calc(100vh-64px)] lg:h-[calc(100vh-0px)] w-full bg-transparent overflow-hidden relative p-4 gap-4">
       
-      {/* File Explorer (Left Panel) - Glass styling */}
-      <div className="h-full z-10 hidden md:block rounded-xl overflow-hidden glass-card shadow-lg flex-shrink-0">
+      {/* File Explorer (Left Panel) */}
+      <div className="h-full z-10 hidden md:block rounded-xl overflow-hidden bg-[rgba(10,10,10,0.72)] backdrop-blur-[18px] border border-[rgba(255,255,255,0.08)] shadow-[0_20px_60px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.04)] flex-shrink-0">
         <FileExplorer 
           files={files} 
           activeFile={activeFileId} 
@@ -70,24 +70,27 @@ export default function DebugWorkspace() {
       </div>
       
       {/* Editor Center Stage */}
-      <div className={`flex flex-col flex-1 h-full min-w-0 z-10 rounded-xl overflow-hidden bg-surface/50 backdrop-blur-2xl border transition-all duration-700 ${getGlowColor()}`}>
+      <div className={`flex flex-col flex-1 h-full min-w-0 z-10 rounded-xl overflow-hidden bg-[rgba(10,10,10,0.72)] backdrop-blur-[18px] border border-[rgba(255,255,255,0.08)] shadow-[0_20px_60px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.04)] transition-all duration-700`}>
         
         {/* Editor Toolbar / Frame Header */}
-        <div className="h-12 bg-surface-strong/50 border-b border-border flex items-center px-2 flex-shrink-0">
-          <div className="flex items-center gap-1.5 px-3 mr-4">
-            <div className="w-3 h-3 rounded-full bg-error-base/80" />
-            <div className="w-3 h-3 rounded-full bg-warning-base/80" />
-            <div className="w-3 h-3 rounded-full bg-success-base/80" />
+        <div className="h-[40px] bg-[rgba(255,255,255,0.02)] border-b border-[rgba(255,255,255,0.08)] flex items-center px-3 flex-shrink-0">
+          <div className="flex items-center gap-2 mr-6">
+            <div className="w-3 h-3 rounded-full bg-[#EF4444]" />
+            <div className="w-3 h-3 rounded-full bg-[#F59E0B]" />
+            <div className="w-3 h-3 rounded-full bg-[#10B981]" />
           </div>
-          {files.map(file => (
-            <button
-              key={file.id}
-              onClick={() => setActiveFileId(file.id)}
-              className={`px-5 h-[80%] rounded-md flex items-center text-sm min-w-[120px] transition-all duration-300 font-medium ${activeFileId === file.id ? 'bg-surface/60 shadow-sm text-text border border-border' : 'text-text-muted hover:bg-surface-hover hover:text-text border border-transparent'}`}
-            >
-              {file.name}
-            </button>
-          ))}
+          <div className="flex items-center h-full gap-1">
+            {files.map(file => (
+              <button
+                key={file.id}
+                onClick={() => setActiveFileId(file.id)}
+                className={`px-4 h-full flex flex-col justify-center items-center text-[12px] min-w-[120px] transition-all duration-300 ${activeFileId === file.id ? 'text-[#F5F5F5] bg-[rgba(255,255,255,0.06)] border-t-2 border-[#F5F5F5]' : 'text-[#A1A1A1] hover:bg-[rgba(255,255,255,0.04)] hover:text-[#F5F5F5] border-t-2 border-transparent'}`}
+              >
+                <span>{file.name}</span>
+                <span className="text-[9px] opacity-50 font-mono mt-0.5 hidden">src/{file.name}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Monaco Instance */}
@@ -101,7 +104,7 @@ export default function DebugWorkspace() {
       </div>
 
       {/* AI Assistant (Right Panel) */}
-      <div className="h-full z-10 hidden lg:block rounded-xl overflow-hidden bg-surface/50 backdrop-blur-2xl border border-border shadow-lg flex-shrink-0 relative">
+      <div className="h-full w-[360px] z-10 hidden lg:block rounded-xl overflow-hidden bg-[rgba(10,10,10,0.72)] backdrop-blur-[18px] border border-[rgba(255,255,255,0.08)] shadow-[0_20px_60px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.04)] flex-shrink-0 relative flex flex-col">
         <AIAssistant 
           analysisState={analysisState} 
           analysisData={analysisData}
