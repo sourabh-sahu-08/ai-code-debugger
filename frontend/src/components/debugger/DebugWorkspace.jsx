@@ -27,8 +27,8 @@ export default function DebugWorkspace() {
     setFiles(files.map(f => f.id === id ? { ...f, content: newContent } : f));
   };
 
-  const handleAnalyze = async (code) => {
-    if (!code.trim()) {
+  const handleAnalyze = async (code, prompt = '') => {
+    if (!code || !code.trim()) {
       showToast('Please provide some code to analyze', 'warning');
       return;
     }
@@ -36,7 +36,7 @@ export default function DebugWorkspace() {
     setAnalysisState('analyzing');
     
     try {
-      const data = await analyzeService.analyzeCode(code, activeFile?.language || 'javascript', 'quick-fix');
+      const data = await analyzeService.analyzeCode(code, activeFile?.language || 'javascript', 'quick-fix', prompt);
       setAnalysisData(data.data);
       setAnalysisState('success');
       showToast('Analysis complete', 'success');
@@ -44,6 +44,13 @@ export default function DebugWorkspace() {
       console.error(error);
       setAnalysisState('error');
       showToast(error.message || 'Analysis failed', 'error');
+    }
+  };
+
+  const handleApplyFix = () => {
+    if (analysisData?.suggestedFix && activeFile) {
+      handleEditorChange(activeFile.id, analysisData.suggestedFix);
+      showToast('Fix applied successfully!', 'success');
     }
   };
 
@@ -108,7 +115,8 @@ export default function DebugWorkspace() {
         <AIAssistant 
           analysisState={analysisState} 
           analysisData={analysisData}
-          onAnalyze={() => handleAnalyze(activeFile?.content)}
+          onAnalyze={(prompt) => handleAnalyze(activeFile?.content, prompt)}
+          onApplyFix={handleApplyFix}
         />
       </div>
     </div>
