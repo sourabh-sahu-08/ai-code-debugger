@@ -49,7 +49,7 @@ export default function DashboardLayout({ children }) {
   const toggleMobile = () => setMobileOpen(!mobileOpen);
 
   return (
-    <div className="min-h-screen bg-transparent flex overflow-hidden text-text">
+    <div className="h-screen bg-transparent flex overflow-hidden text-text">
       <DashboardBackground />
       <CommandPalette />
       
@@ -68,7 +68,7 @@ export default function DashboardLayout({ children }) {
       <motion.aside 
         animate={{ width: isCollapsed ? 64 : 260 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="hidden lg:flex flex-col h-full bg-[rgba(8,8,8,0.94)] backdrop-blur-[24px] border-r border-[rgba(255,255,255,0.06)] relative z-30 flex-shrink-0"
+        className="hidden lg:flex flex-col h-full bg-transparent backdrop-blur-[24px] border-r border-[rgba(255,255,255,0.06)] relative z-30 flex-shrink-0"
       >
         <div className="h-[64px] flex items-center justify-between px-5 flex-shrink-0">
           <AnimatePresence mode="popLayout">
@@ -211,7 +211,7 @@ export default function DashboardLayout({ children }) {
       </AnimatePresence>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col h-full relative pt-[64px] lg:pt-0 overflow-hidden bg-transparent z-10 min-w-0">
+      <main className="flex-1 flex flex-col h-full relative pt-[64px] lg:pt-0 overflow-y-auto bg-transparent z-10 min-w-0">
         {children}
       </main>
 
