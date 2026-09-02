@@ -5,13 +5,13 @@ const aiService = require('../services/aiService');
 // @route   POST /api/v1/analyze
 // @access  Private
 exports.analyzeCode = asyncHandler(async (req, res, next) => {
-  const { code, language, mode } = req.body;
+  const { code, language, mode, prompt } = req.body;
 
   if (!code) {
     return res.status(400).json({ success: false, error: 'Please provide code to analyze' });
   }
 
-  const analysis = await aiService.analyzeCode(code, language, mode);
+  const analysis = await aiService.analyzeCode(code, language, mode, prompt);
 
   const DebugSession = require('../models/DebugSession');
   
