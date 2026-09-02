@@ -70,7 +70,7 @@ export default function DebugWorkspace() {
       </div>
       
       {/* Editor Center Stage */}
-      <div className={`flex flex-col flex-1 h-full min-w-0 z-10 rounded-xl overflow-hidden bg-surface border transition-all duration-700 ${getGlowColor()}`}>
+      <div className={`flex flex-col flex-1 h-full min-w-0 z-10 rounded-xl overflow-hidden bg-surface/50 backdrop-blur-2xl border transition-all duration-700 ${getGlowColor()}`}>
         
         {/* Editor Toolbar / Frame Header */}
         <div className="h-12 bg-surface-strong/50 border-b border-border flex items-center px-2 flex-shrink-0">
@@ -83,7 +83,7 @@ export default function DebugWorkspace() {
             <button
               key={file.id}
               onClick={() => setActiveFileId(file.id)}
-              className={`px-5 h-[80%] rounded-md flex items-center text-sm min-w-[120px] transition-all duration-300 font-medium ${activeFileId === file.id ? 'bg-surface shadow-sm text-text border border-border' : 'text-text-muted hover:bg-surface-hover hover:text-text border border-transparent'}`}
+              className={`px-5 h-[80%] rounded-md flex items-center text-sm min-w-[120px] transition-all duration-300 font-medium ${activeFileId === file.id ? 'bg-surface/60 shadow-sm text-text border border-border' : 'text-text-muted hover:bg-surface-hover hover:text-text border border-transparent'}`}
             >
               {file.name}
             </button>
@@ -91,7 +91,7 @@ export default function DebugWorkspace() {
         </div>
 
         {/* Monaco Instance */}
-        <div className="flex-1 bg-surface relative z-0">
+        <div className="flex-1 bg-transparent relative z-0">
           <CodeEditor 
             file={activeFile} 
             onChange={handleEditorChange} 
@@ -101,7 +101,7 @@ export default function DebugWorkspace() {
       </div>
 
       {/* AI Assistant (Right Panel) */}
-      <div className="h-full z-10 hidden lg:block rounded-xl overflow-hidden bg-surface border border-border shadow-lg flex-shrink-0 relative">
+      <div className="h-full z-10 hidden lg:block rounded-xl overflow-hidden bg-surface/50 backdrop-blur-2xl border border-border shadow-lg flex-shrink-0 relative">
         <AIAssistant 
           analysisState={analysisState} 
           analysisData={analysisData}

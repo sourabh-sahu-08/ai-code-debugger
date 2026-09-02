@@ -3,28 +3,28 @@ import Editor, { useMonaco } from '@monaco-editor/react';
 import { Loader2 } from 'lucide-react';
 
 const khudsekrleTheme = {
-  base: 'vs',
+  base: 'vs-dark',
   inherit: true,
   rules: [
-    { background: 'FFFFFF' },
-    { token: 'comment', foreground: '64748B', fontStyle: 'italic' },
-    { token: 'keyword', foreground: '2563EB', fontStyle: 'bold' },
-    { token: 'identifier', foreground: '1E293B' },
-    { token: 'string', foreground: '10B981' },
-    { token: 'number', foreground: 'F59E0B' },
-    { token: 'type', foreground: '0EA5E9' },
-    { token: 'class', foreground: '0EA5E9' }
+    { background: '00000000' },
+    { token: 'comment', foreground: 'A1A1A1', fontStyle: 'italic' },
+    { token: 'keyword', foreground: 'FFFFFF', fontStyle: 'bold' },
+    { token: 'identifier', foreground: 'E5E5E5' },
+    { token: 'string', foreground: 'D4D4D4' },
+    { token: 'number', foreground: 'D4D4D4' },
+    { token: 'type', foreground: 'FFFFFF' },
+    { token: 'class', foreground: 'FFFFFF' }
   ],
   colors: {
-    'editor.background': '#FFFFFF',
-    'editor.foreground': '#1E293B',
-    'editorLineNumber.foreground': '#94A3B8',
-    'editorLineNumber.activeForeground': '#2563EB',
-    'editor.lineHighlightBackground': '#F1F5F9',
-    'editor.selectionBackground': '#BFDBFE',
-    'editorCursor.foreground': '#2563EB',
-    'editorIndentGuide.background': '#F1F5F9',
-    'editorIndentGuide.activeBackground': '#E2E8F0',
+    'editor.background': '#00000000',
+    'editor.foreground': '#FFFFFF',
+    'editorLineNumber.foreground': '#555555',
+    'editorLineNumber.activeForeground': '#FFFFFF',
+    'editor.lineHighlightBackground': '#FFFFFF08',
+    'editor.selectionBackground': '#FFFFFF20',
+    'editorCursor.foreground': '#FFFFFF',
+    'editorIndentGuide.background': '#FFFFFF10',
+    'editorIndentGuide.activeBackground': '#FFFFFF30',
     'editorError.foreground': '#EF4444',
     'editorWarning.foreground': '#F59E0B'
   }
