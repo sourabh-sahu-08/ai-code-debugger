@@ -68,7 +68,7 @@ export default function DashboardLayout({ children }) {
       <motion.aside 
         animate={{ width: isCollapsed ? 64 : 260 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="hidden lg:flex flex-col h-full bg-[rgba(10,10,10,0.88)] backdrop-blur-[24px] border-r border-[rgba(255,255,255,0.06)] relative z-30"
+        className="hidden lg:flex flex-col h-full bg-[rgba(8,8,8,0.94)] backdrop-blur-[24px] border-r border-[rgba(255,255,255,0.06)] relative z-30 flex-shrink-0"
       >
         <div className="h-[64px] flex items-center justify-between px-5 flex-shrink-0">
           <AnimatePresence mode="popLayout">
@@ -95,7 +95,6 @@ export default function DashboardLayout({ children }) {
         <div className="flex-1 overflow-y-auto no-scrollbar py-2 flex flex-col gap-1 px-3">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = location.pathname.startsWith(item.path); // Use exact or startsWith to fix routing issues if they have subroutes, but wait, the instructions said: "Only apply the active class to the exact current route"
             const isExactActive = location.pathname === item.path;
             
             return (
@@ -128,7 +127,7 @@ export default function DashboardLayout({ children }) {
           })}
         </div>
 
-        <div className="h-[76px] px-4 border-t border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] flex items-center justify-between flex-shrink-0">
+        <div className="h-[76px] mt-auto px-4 border-t border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] flex items-center justify-between flex-shrink-0">
           <div className="flex items-center gap-3 overflow-hidden">
             <Avatar fallback={user?.name?.charAt(0)?.toUpperCase() || 'U'} className="w-8 h-8 rounded bg-white/10 text-white text-[11px] font-bold flex-shrink-0" />
             <AnimatePresence mode="popLayout">
@@ -212,7 +211,7 @@ export default function DashboardLayout({ children }) {
       </AnimatePresence>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col h-full relative pt-16 lg:pt-0 overflow-y-auto bg-transparent z-10">
+      <main className="flex-1 flex flex-col h-full relative pt-[64px] lg:pt-0 overflow-hidden bg-transparent z-10 min-w-0">
         {children}
       </main>
 

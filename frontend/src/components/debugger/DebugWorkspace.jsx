@@ -61,7 +61,7 @@ export default function DebugWorkspace() {
     <div className="flex h-[calc(100vh-64px)] lg:h-full w-full bg-transparent overflow-hidden relative">
       
       {/* File Explorer (Left Panel) */}
-      <div className="h-full z-10 hidden md:block bg-[rgba(8,8,8,0.75)] backdrop-blur-[16px] border-r border-[rgba(255,255,255,0.05)] flex-shrink-0">
+      <div className="h-full z-10 hidden md:block bg-[rgba(10,10,10,0.82)] backdrop-blur-[16px] border-r border-[rgba(255,255,255,0.05)] flex-shrink-0">
         <FileExplorer 
           files={files} 
           activeFile={activeFileId} 
