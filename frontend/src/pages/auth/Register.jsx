@@ -12,7 +12,7 @@ import './Auth.css';
 const AuthBackground = () => (
   <div className="auth-video-wrapper">
     <video autoPlay muted loop playsInline preload="auto" className="auth-video">
-      <source src="/auth-bg.mp4" type="video/mp4" />
+      <source src="/12341903_1920_1080_30fps.mp4" type="video/mp4" />
     </video>
     <div className="auth-video-overlay" />
     <div className="auth-ambient-glow-layer">
@@ -91,7 +91,7 @@ export default function Register() {
                     type="text" 
                     required 
                     leftIcon={User}
-                    placeholder="John Doe"
+                    placeholder="Your Name"
                     value={formData.name}
                     onChange={handleChange}
                     disabled={loading}
@@ -106,7 +106,7 @@ export default function Register() {
                     type="text" 
                     required 
                     leftIcon={AtSign}
-                    placeholder="johndoe"
+                    placeholder="yourusername"
                     value={formData.username}
                     onChange={handleChange}
                     disabled={loading}
@@ -149,7 +149,7 @@ export default function Register() {
                 />
               </div>
 
-              <Button type="submit" className="auth-button-primary w-full mt-4 rounded-xl py-6 flex items-center justify-center font-medium" isLoading={loading} disabled={loading} rightIcon={!loading && <ArrowRight className="w-4 h-4" />}>
+              <Button type="submit" className="auth-button-primary w-full mt-4 rounded-xl font-medium" isLoading={loading} disabled={loading} rightIcon={!loading && <ArrowRight className="w-4 h-4" />}>
                 Create Account
               </Button>
             </form>
