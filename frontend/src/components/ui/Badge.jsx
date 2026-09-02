@@ -7,7 +7,7 @@ export function Badge({
   ...props
 }) {
   const variants = {
-    default: 'border-transparent bg-primary-base text-white',
+    default: 'border-transparent bg-primary-base text-black',
     secondary: 'border-transparent bg-surface-strong text-text font-medium',
     outline: 'text-text border-border',
     success: 'border-transparent bg-success-soft text-success-base font-bold',
