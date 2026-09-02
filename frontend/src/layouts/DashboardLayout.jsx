@@ -156,14 +156,14 @@ export default function DashboardLayout({ children }) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={toggleMobile}
-              className="lg:hidden fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
+              className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
             />
             <motion.div 
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
-              className="lg:hidden fixed top-0 left-0 bottom-0 w-72 bg-surface border-r border-border z-50 flex flex-col"
+              className="lg:hidden fixed top-0 left-0 bottom-0 w-72 bg-[#050505] backdrop-blur-xl border-r border-border z-50 flex flex-col"
             >
               <div className="h-16 flex items-center px-6 border-b border-border/50">
                 <Terminal className="w-6 h-6 text-text mr-2" />
