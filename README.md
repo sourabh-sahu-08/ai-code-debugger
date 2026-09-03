@@ -25,7 +25,7 @@ The app includes an authenticated frontend workspace, a persistent analysis hist
 
 ```text
 frontend/   React client and workspace UI
-backend/    Express API, auth, analysis, persistence
+backend/    Express API, auth, analysis, persistence.   
 render.yaml Render deployment blueprint
 ```
 
